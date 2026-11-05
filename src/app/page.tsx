@@ -3,7 +3,6 @@ import { createClient } from "@/lib/supabase/server";
 import {
   GraduationCap,
   LogIn,
-  UserPlus,
   Calendar,
   Clock,
   ShieldCheck,
@@ -62,15 +61,9 @@ export default async function Home() {
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-3.5 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-xl"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/register"
               className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-xl seamless-btn shadow-xs"
             >
-              Daftar Siswa
+              Masuk Portal
             </Link>
           </div>
         </div>
@@ -97,13 +90,6 @@ export default async function Home() {
             >
               <LogIn className="w-4 h-4" />
               <span>Masuk ke Akun</span>
-            </Link>
-            <Link
-              href="/register"
-              className="px-5 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/70 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl flex items-center justify-center gap-2 seamless-btn"
-            >
-              <UserPlus className="w-4 h-4 text-slate-500 dark:text-slate-400" />
-              <span>Pendaftaran Siswa Baru</span>
             </Link>
             <Link
               href="/repository"

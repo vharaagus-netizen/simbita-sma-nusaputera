@@ -126,13 +126,7 @@ export default function LoginPage() {
 
           <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-center">
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Belum memiliki akun bimbingan?{' '}
-              <Link
-                href="/register"
-                className="font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline"
-              >
-                Daftar sebagai Siswa
-              </Link>
+              Belum memiliki akun bimbingan? Silakan hubungi Administrator / Koordinator sekolah.
             </p>
           </div>
         </div>
