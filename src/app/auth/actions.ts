@@ -18,56 +18,75 @@ function resolveAuthEmail(usernameOrEmail: string): string {
 }
 
 export async function login(formData: FormData) {
-  const identifier = (formData.get('username') as string)?.trim()
-  const password = formData.get('password') as string
+  try {
+    const identifier = (formData.get('username') as string)?.trim()
+    const password = formData.get('password') as string
 
-  if (!identifier || !password) {
-    return { error: 'Username dan kata sandi wajib diisi.' }
-  }
-
-  const authEmail = resolveAuthEmail(identifier)
-  const supabase = await createClient()
-
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: authEmail,
-    password,
-  })
-
-  if (error) {
-    if (error.message.includes('Invalid login credentials')) {
-      return { error: 'Username atau kata sandi salah. Silakan coba lagi.' }
+    if (!identifier || !password) {
+      return { error: 'Username dan kata sandi wajib diisi.' }
     }
-    return { error: 'Gagal masuk: ' + error.message }
-  }
 
-  if (data.user) {
-    // Ambil peran dan status aktif pengguna dari profiles
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role, is_active')
-      .eq('id', data.user.id)
-      .single()
-
-    if (profile && profile.is_active === false) {
-      await supabase.auth.signOut()
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       return {
         error:
-          'Akun Anda telah dinonaktifkan / diarsipkan oleh Administrator. Silakan hubungi koordinator sekolah jika ini keliru.',
+          'Konfigurasi Supabase (Environment Variables) belum aktif di Vercel. Pastikan NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_ANON_KEY sudah disetel di Project Settings Vercel.',
       }
     }
 
-    const role = profile?.role || 'student'
+    const authEmail = resolveAuthEmail(identifier)
+    const supabase = await createClient()
 
-    if (role === 'admin') {
-      redirect('/dashboard/admin')
-    } else if (role === 'mentor') {
-      redirect('/dashboard/mentor')
-    } else {
-      redirect('/dashboard/student')
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: authEmail,
+      password,
+    })
+
+    if (error) {
+      if (error.message.includes('Invalid login credentials')) {
+        return { error: 'Username atau kata sandi salah. Silakan coba lagi.' }
+      }
+      return { error: 'Gagal masuk: ' + error.message }
+    }
+
+    if (data.user) {
+      // Ambil peran dan status aktif pengguna dari profiles
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role, is_active')
+        .eq('id', data.user.id)
+        .single()
+
+      if (profile && profile.is_active === false) {
+        await supabase.auth.signOut()
+        return {
+          error:
+            'Akun Anda telah dinonaktifkan / diarsipkan oleh Administrator. Silakan hubungi koordinator sekolah jika ini keliru.',
+        }
+      }
+
+      const role = profile?.role || 'student'
+
+      if (role === 'admin') {
+        redirect('/dashboard/admin')
+      } else if (role === 'mentor') {
+        redirect('/dashboard/mentor')
+      } else {
+        redirect('/dashboard/student')
+      }
+    }
+
+    return { error: 'Gagal melakukan login.' }
+  } catch (err: any) {
+    if (err?.message === 'NEXT_REDIRECT' || err?.digest?.startsWith('NEXT_REDIRECT')) {
+      throw err
+    }
+    console.error('Error in login action:', err)
+    return {
+      error:
+        err?.message ||
+        'Terjadi kendala saat menghubungi server database. Silakan coba beberapa saat lagi.',
     }
   }
-
-  return { error: 'Gagal melakukan login.' }
 }
 
 export async function register(formData: FormData) {

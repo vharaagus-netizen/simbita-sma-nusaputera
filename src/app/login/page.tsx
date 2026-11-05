@@ -15,11 +15,20 @@ export default function LoginPage() {
     setError(null)
     setLoading(true)
 
-    const formData = new FormData(event.currentTarget)
-    const result = await login(formData)
+    try {
+      const formData = new FormData(event.currentTarget)
+      const result = await login(formData)
 
-    if (result?.error) {
-      setError(result.error)
+      if (result?.error) {
+        setError(result.error)
+        setLoading(false)
+      }
+    } catch (err: any) {
+      console.error('Login submit error:', err)
+      setError(
+        err?.message ||
+          'Terjadi kendala saat menghubungi server. Pastikan koneksi internet stabil dan coba lagi.'
+      )
       setLoading(false)
     }
   }
