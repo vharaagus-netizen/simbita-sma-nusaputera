@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { uploadGuidanceDraft } from './actions'
-import { Upload, AlertCircle, CheckCircle2 } from 'lucide-react'
+import { Upload, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
 
 const CHAPTER_OPTIONS = [
   'Bab 1 - Pendahuluan',
@@ -115,14 +115,34 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
         />
       </div>
 
-      <div className="flex justify-end pt-1">
+      <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between gap-2 pt-1">
+        {loading ? (
+          <p className="text-[11px] text-blue-600 dark:text-blue-400 flex items-center gap-1.5 animate-pulse">
+            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            <span>Sedang mengunggah berkas ke cloud storage... Mohon jangan tutup halaman ini.</span>
+          </p>
+        ) : (
+          <span className="text-[11px] text-slate-400 dark:text-slate-500">
+            Pastikan naskah sesuai format (.pdf / .docx)
+          </span>
+        )}
+
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors shrink-0"
         >
-          <Upload className="w-4 h-4" />
-          <span>{loading ? 'Mengunggah Naskah...' : 'Kirim Naskah ke Pembimbing'}</span>
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span>Mengunggah...</span>
+            </>
+          ) : (
+            <>
+              <Upload className="w-4 h-4" />
+              <span>Kirim Naskah ke Pembimbing</span>
+            </>
+          )}
         </button>
       </div>
     </form>

@@ -44,11 +44,6 @@ export async function uploadGuidanceDraft(formData: FormData) {
 
   const adminSupabase = createAdminClient()
 
-  // Pastikan bucket thesis-documents ada
-  await adminSupabase.storage.createBucket('thesis-documents', {
-    public: true,
-  })
-
   const { error: storageError } = await adminSupabase.storage
     .from('thesis-documents')
     .upload(storagePath, file, {
