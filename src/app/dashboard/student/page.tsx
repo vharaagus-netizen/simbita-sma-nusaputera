@@ -11,9 +11,14 @@ import {
   Clock,
   Printer,
   ShieldCheck,
+  Sparkles,
+  MapPin,
+  Award,
 } from 'lucide-react'
-import type { Thesis, Profile } from '@/types/database'
+import type { Thesis, Profile, DefenseScore } from '@/types/database'
 import { ThemeToggle } from '@/components/theme-toggle'
+import WhatsAppButton from '@/components/whatsapp-button'
+import { getFeatureSettings } from '@/lib/settings'
 
 export const dynamic = 'force-dynamic'
 
@@ -37,6 +42,9 @@ export default async function StudentDashboard() {
 
   const studentProfile = profile as Profile
 
+  // Ambil saklar fitur On / Off
+  const featureSettings = await getFeatureSettings()
+
   // Cari tugas akhir yang melibatkan siswa ini (baik sebagai ketua maupun anggota)
   const { data: thesisData } = await supabase
     .from('theses')
@@ -44,7 +52,9 @@ export default async function StudentDashboard() {
       *,
       leader:leader_id(*),
       member:member_id(*),
-      mentor:mentor_id(*)
+      mentor:mentor_id(*),
+      examiner1:examiner1_id(*),
+      examiner2:examiner2_id(*)
     `)
     .or(`leader_id.eq.${user.id},member_id.eq.${user.id}`)
     .maybeSingle()
@@ -53,7 +63,28 @@ export default async function StudentDashboard() {
     leader?: Profile
     member?: Profile
     mentor?: Profile
+    examiner1?: Profile
+    examiner2?: Profile
   }) | null
+
+  // Ambil nilai ujian sidang jika fitur penilaian aktif
+  let scores: DefenseScore[] = []
+  if (featureSettings.defense_scoring && thesis?.id) {
+    const { data: scoreData } = await supabase
+      .from('defense_scores')
+      .select('*, examiner:examiner_id(name, identifier)')
+      .eq('thesis_id', thesis.id)
+    if (scoreData) scores = scoreData as DefenseScore[]
+  }
+
+  // Hitung rata-rata nilai sidang jika ada
+  const averageFinalScore =
+    scores.length > 0
+      ? Math.round(
+          scores.reduce((acc, curr) => acc + (curr.final_score || 0), 0) /
+            scores.length
+        )
+      : null
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] transition-colors duration-200">
@@ -78,6 +109,14 @@ export default async function StudentDashboard() {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/repository"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <span>Koleksi KTI</span>
+            </Link>
+
             <ThemeToggle />
 
             <div className="text-right hidden sm:block border-l border-slate-200 dark:border-slate-800 pl-3">
@@ -175,7 +214,18 @@ export default async function StudentDashboard() {
                   </p>
                 </div>
 
-                <div className="shrink-0 self-start sm:self-auto">
+                <div className="shrink-0 flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                  {/* FITUR 3: TOMBOL WHATSAPP CEPAT */}
+                  {thesis.mentor && (
+                    <WhatsAppButton
+                      mentorName={thesis.mentor.name}
+                      mentorPhone={thesis.mentor.phone || thesis.mentor.phone_number}
+                      studentName={studentProfile?.name}
+                      studentIdentifier={studentProfile?.identifier}
+                      thesisTitle={thesis.title}
+                    />
+                  )}
+
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/50">
                     {thesis.status === 'pending_mentor'
                       ? 'Menunggu Plotting Guru'
@@ -197,7 +247,7 @@ export default async function StudentDashboard() {
                   <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 truncate">
                     {thesis.leader?.name || 'Siswa 1'}
                   </p>
-                  <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold mt-0.5">
+                  <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold mt-0.5 font-mono">
                     {thesis.leader?.identifier}
                   </p>
                 </div>
@@ -207,7 +257,7 @@ export default async function StudentDashboard() {
                   <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 truncate">
                     {thesis.member?.name || 'Belum ditambahkan'}
                   </p>
-                  <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold mt-0.5">
+                  <p className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold mt-0.5 font-mono">
                     {thesis.member?.identifier || '-'}
                   </p>
                 </div>
@@ -217,12 +267,101 @@ export default async function StudentDashboard() {
                   <p className="font-bold text-slate-800 dark:text-slate-200 text-sm mt-0.5 truncate">
                     {thesis.mentor?.name || 'Belum di-plot oleh Admin'}
                   </p>
-                  <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold mt-0.5">
+                  <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold mt-0.5 font-mono">
                     {thesis.mentor?.identifier || 'Menunggu Koordinator'}
                   </p>
                 </div>
               </div>
             </div>
+
+            {/* FITUR 1 (JIKA SAKLAR ON): KARTU JADWAL SIDANG */}
+            {featureSettings.defense_scheduling && thesis.defense_date && (
+              <div className="bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200 dark:border-blue-900/60 rounded-2xl p-5 shadow-xs space-y-3 seamless-card">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold">
+                    <Calendar className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      Jadwal Sidang Tugas Akhir Anda
+                    </h3>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300">
+                      Diselenggarakan oleh Panitia Sidang SMA Nusaputera Semarang
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl border border-blue-100 dark:border-blue-950">
+                    <span className="text-slate-400 dark:text-slate-500 block mb-0.5">Waktu Sidang:</span>
+                    <strong className="text-slate-900 dark:text-slate-100">
+                      {new Date(thesis.defense_date).toLocaleDateString('id-ID', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </strong>
+                  </div>
+
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl border border-blue-100 dark:border-blue-950">
+                    <span className="text-slate-400 dark:text-slate-500 block mb-0.5">Tempat / Ruangan:</span>
+                    <strong className="text-slate-900 dark:text-slate-100">
+                      {thesis.defense_location || 'Ruang Sidang Sekolah'}
+                    </strong>
+                  </div>
+
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-3 rounded-xl border border-blue-100 dark:border-blue-950">
+                    <span className="text-slate-400 dark:text-slate-500 block mb-0.5">Dewan Penguji:</span>
+                    <p className="text-slate-900 dark:text-slate-100 font-semibold truncate">
+                      1. {thesis.examiner1?.name || 'Belum ditugaskan'}
+                    </p>
+                    {thesis.examiner2 && (
+                      <p className="text-slate-900 dark:text-slate-100 font-semibold truncate">
+                        2. {thesis.examiner2.name}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* FITUR 4 (JIKA SAKLAR ON): HASIL NILAI SIDANG */}
+            {featureSettings.defense_scoring && scores.length > 0 && averageFinalScore !== null && (
+              <div className="bg-white dark:bg-[#111927] border border-purple-200/80 dark:border-purple-900/60 rounded-2xl p-5 shadow-xs space-y-3 seamless-card">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      Hasil Penilaian Sidang Tugas Akhir
+                    </h3>
+                  </div>
+                  <span className="text-xs font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 px-3 py-1 rounded-full border border-purple-200/60 dark:border-purple-800/50">
+                    Nilai Akhir: {averageFinalScore} / 100
+                  </span>
+                </div>
+
+                <div className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+                  {scores.map((s, idx) => (
+                    <div key={s.id || idx} className="py-2 flex items-center justify-between">
+                      <div>
+                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                          {s.examiner?.name || `Penguji ${idx + 1}`} ({s.examiner_role})
+                        </span>
+                        {s.notes && (
+                          <p className="text-[11px] text-slate-500 italic mt-0.5">"{s.notes}"</p>
+                        )}
+                      </div>
+                      <span className="font-bold text-slate-900 dark:text-slate-100">
+                        {s.final_score}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* NAVIGASI MENU BIMBINGAN */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

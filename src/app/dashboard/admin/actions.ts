@@ -100,5 +100,108 @@ export async function adminCreateAccount(formData: FormData) {
   }
 
   revalidatePath('/dashboard/admin')
-  return { success: true, message: `Akun ${name} (${role}) berhasil dibuat!` }
+  return { success: true, message: `Akun "${cleanUsername}" berhasil dibuat!` }
+}
+
+// TOGGLE FEATURE FLAG (SAKLAR ON/OFF FITUR)
+export async function toggleAdminFeature(key: 'feature_defense_scheduling' | 'feature_defense_scoring', value: boolean) {
+  try {
+    const adminSupabase = createAdminClient()
+    const { error } = await adminSupabase
+      .from('app_settings')
+      .upsert({
+        key,
+        value,
+        updated_at: new Date().toISOString(),
+      })
+
+    if (error) {
+      return { error: 'Gagal menyimpan status saklar fitur: ' + error.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    revalidatePath('/dashboard/student')
+    revalidatePath('/dashboard/mentor')
+    return { success: true }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem' }
+  }
+}
+
+// ATUR JADWAL SIDANG (DEFENSE SCHEDULING)
+export async function scheduleThesisDefense(formData: FormData) {
+  const thesisId = formData.get('thesis_id') as string
+  const defenseDate = formData.get('defense_date') as string
+  const defenseLocation = (formData.get('defense_location') as string)?.trim()
+  const examiner1Id = (formData.get('examiner1_id') as string) || null
+  const examiner2Id = (formData.get('examiner2_id') as string) || null
+
+  if (!thesisId || !defenseDate) {
+    return { error: 'Kelompok dan Tanggal Sidang wajib diisi.' }
+  }
+
+  const adminSupabase = createAdminClient()
+  const { error } = await adminSupabase
+    .from('theses')
+    .update({
+      defense_date: defenseDate,
+      defense_location: defenseLocation || null,
+      examiner1_id: examiner1Id,
+      examiner2_id: examiner2Id,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', thesisId)
+
+  if (error) {
+    return { error: 'Gagal menjadwalkan sidang: ' + error.message }
+  }
+
+  revalidatePath('/dashboard/admin')
+  revalidatePath('/dashboard/student')
+  revalidatePath('/dashboard/mentor')
+  return { success: true }
+}
+
+// INPUT NILAI RUBRIK SIDANG (DEFENSE SCORING)
+export async function submitDefenseScore(formData: FormData) {
+  const thesisId = formData.get('thesis_id') as string
+  const examinerRole = (formData.get('examiner_role') as string) || 'penguji'
+  const scorePresentation = parseFloat(formData.get('score_presentation') as string) || 0
+  const scoreContent = parseFloat(formData.get('score_content') as string) || 0
+  const scoreMastery = parseFloat(formData.get('score_mastery') as string) || 0
+  const notes = (formData.get('notes') as string)?.trim() || null
+
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { error: 'Sesi login telah berakhir.' }
+  }
+
+  const adminSupabase = createAdminClient()
+  const { error } = await adminSupabase
+    .from('defense_scores')
+    .upsert(
+      {
+        thesis_id: thesisId,
+        examiner_id: user.id,
+        examiner_role: examinerRole,
+        score_presentation: scorePresentation,
+        score_content: scoreContent,
+        score_mastery: scoreMastery,
+        notes,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: 'thesis_id,examiner_id' }
+    )
+
+  if (error) {
+    return { error: 'Gagal menyimpan skor ujian: ' + error.message }
+  }
+
+  revalidatePath('/dashboard/admin')
+  revalidatePath(`/dashboard/mentor/group/${thesisId}`)
+  return { success: true }
 }

@@ -11,10 +11,15 @@ import {
   BookOpen,
   User,
   PlusCircle,
+  Sparkles,
 } from 'lucide-react'
 import type { Thesis, Profile } from '@/types/database'
 import PlottingRow from './plotting-row'
 import AdminCreateForm from './admin-create-form'
+import ExportExcelButton from './export-button'
+import FeatureToggles from './feature-toggles'
+import DefenseScheduleSection from './defense-schedule-section'
+import { getFeatureSettings } from '@/lib/settings'
 import { ThemeToggle } from '@/components/theme-toggle'
 
 export const dynamic = 'force-dynamic'
@@ -41,14 +46,19 @@ export default async function AdminDashboardPage() {
     redirect('/')
   }
 
-  // 1. Ambil semua kelompok tugas akhir beserta data ketua, anggota, dan pembimbing
+  // Ambil pengaturan fitur On / Off
+  const featureSettings = await getFeatureSettings()
+
+  // 1. Ambil semua kelompok tugas akhir beserta data ketua, anggota, pembimbing, dan penguji
   const { data: thesesData } = await supabase
     .from('theses')
     .select(`
       *,
       leader:leader_id(*),
       member:member_id(*),
-      mentor:mentor_id(*)
+      mentor:mentor_id(*),
+      examiner1:examiner1_id(*),
+      examiner2:examiner2_id(*)
     `)
     .order('created_at', { ascending: false })
 
@@ -56,6 +66,8 @@ export default async function AdminDashboardPage() {
     leader?: Profile
     member?: Profile
     mentor?: Profile
+    examiner1?: Profile
+    examiner2?: Profile
   })[]
 
   // 2. Ambil daftar semua guru pembimbing yang terdaftar
@@ -104,6 +116,14 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link
+              href="/repository"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <span>Repositori KTI</span>
+            </Link>
+
             <ThemeToggle />
 
             <div className="text-right hidden sm:block border-l border-slate-200 dark:border-slate-800 pl-3">
@@ -128,19 +148,29 @@ export default async function AdminDashboardPage() {
 
       {/* ISI DASHBOARD KOORDINATOR */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 space-y-6 animate-fade-in">
-        {/* STATISTIK & TOMBOL TAMBAH AKUN */}
+        {/* STATISTIK & TOMBOL AKSI */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
               Panel Pengaturan Guru & Siswa
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Kelola alokasi pembimbing, data kelompok, dan akun pengguna sekolah
+              Kelola alokasi pembimbing, jadwal sidang, data kelompok, dan akun pengguna sekolah
             </p>
           </div>
 
-          <AdminCreateForm />
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* FITUR 2: EKSPOR REKAP EXCEL (CSV) */}
+            <ExportExcelButton theses={theses} />
+            <AdminCreateForm />
+          </div>
         </div>
+
+        {/* SAKLAR FITUR TAMBAHAN (ON/OFF) */}
+        <FeatureToggles
+          initialScheduling={featureSettings.defense_scheduling}
+          initialScoring={featureSettings.defense_scoring}
+        />
 
         {/* RINGKASAN DATA */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
@@ -168,6 +198,11 @@ export default async function AdminDashboardPage() {
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Peserta bimbingan</p>
           </div>
         </div>
+
+        {/* FITUR 1 (JIKA SAKLAR ON): PENJADWALAN SIDANG */}
+        {featureSettings.defense_scheduling && (
+          <DefenseScheduleSection theses={theses} mentors={mentors} />
+        )}
 
         {/* TABEL PLOTTING MANUAL GURU KE KELOMPOK */}
         <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xs dark:shadow-none overflow-hidden seamless-card">

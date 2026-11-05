@@ -10,11 +10,15 @@ import {
   CheckCircle2,
   AlertCircle,
   MapPin,
+  Award,
+  Sparkles,
 } from 'lucide-react'
 import ReviewForm from './review-form'
 import VerifyJournalButton from './verify-button'
-import type { Thesis, GuidanceSession, GuidanceJournal, Profile } from '@/types/database'
+import DefenseScoringCard from './defense-scoring-card'
+import type { Thesis, GuidanceSession, GuidanceJournal, Profile, DefenseScore } from '@/types/database'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { getFeatureSettings } from '@/lib/settings'
 
 export const dynamic = 'force-dynamic'
 
@@ -34,13 +38,19 @@ export default async function MentorGroupDetailPage({
     redirect('/login')
   }
 
+  // Ambil saklar fitur On / Off
+  const featureSettings = await getFeatureSettings()
+
   // Ambil detail kelompok tugas akhir
   const { data: thesisData } = await supabase
     .from('theses')
     .select(`
       *,
       leader:leader_id(*),
-      member:member_id(*)
+      member:member_id(*),
+      mentor:mentor_id(*),
+      examiner1:examiner1_id(*),
+      examiner2:examiner2_id(*)
     `)
     .eq('id', id)
     .single()
@@ -52,6 +62,9 @@ export default async function MentorGroupDetailPage({
   const thesis = thesisData as Thesis & {
     leader?: Profile
     member?: Profile
+    mentor?: Profile
+    examiner1?: Profile
+    examiner2?: Profile
   }
 
   // Ambil riwayat berkas naskah bab
@@ -78,6 +91,33 @@ export default async function MentorGroupDetailPage({
   const journals = (journalsData || []) as GuidanceJournal[]
 
   const verifiedJournalsCount = journals.filter((j) => j.is_verified).length
+
+  // Ambil data nilai sidang jika fitur penilaian aktif
+  let existingScore: DefenseScore | null = null
+  let allDefenseScores: (DefenseScore & { examiner?: Profile })[] = []
+  if (featureSettings.defense_scoring) {
+    const { data: scoresData } = await supabase
+      .from('defense_scores')
+      .select('*, examiner:examiner_id(*)')
+      .eq('thesis_id', thesis.id)
+
+    if (scoresData) {
+      allDefenseScores = scoresData as (DefenseScore & { examiner?: Profile })[]
+      existingScore = allDefenseScores.find((s) => s.examiner_id === user.id) || null
+    }
+  }
+
+  // Tentukan peran pengguna saat ini (Pembimbing / Penguji 1 / Penguji 2)
+  let roleLabel = 'Pembimbing'
+  if (thesis.examiner1_id === user.id) {
+    roleLabel = 'Penguji 1'
+  } else if (thesis.examiner2_id === user.id) {
+    roleLabel = 'Penguji 2'
+  } else if (thesis.mentor_id === user.id) {
+    roleLabel = 'Pembimbing'
+  } else {
+    roleLabel = 'Penguji'
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-8 px-4 sm:px-6 transition-colors duration-200">
@@ -136,6 +176,117 @@ export default async function MentorGroupDetailPage({
             </div>
           </div>
         </div>
+
+        {/* JADWAL SIDANG KTI (KONDISIONAL: FITUR 1 ON) */}
+        {featureSettings.defense_scheduling && (thesis.defense_date || thesis.defense_location) && (
+          <div className="bg-white dark:bg-[#111927] border border-blue-200/80 dark:border-blue-900/60 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                  Jadwal & Penguji Sidang Ujian KTI
+                </h2>
+              </div>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-900/50">
+                Terjadwal
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
+                  Waktu & Tanggal
+                </span>
+                <p className="font-bold text-slate-800 dark:text-slate-200 mt-1">
+                  {thesis.defense_date
+                    ? new Date(thesis.defense_date).toLocaleString('id-ID', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      }) + ' WIB'
+                    : 'Belum ditentukan'}
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
+                  Ruangan / Lokasi
+                </span>
+                <p className="font-bold text-slate-800 dark:text-slate-200 mt-1 flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-rose-500" />
+                  <span>{thesis.defense_location || 'Ruang Sidang SMA Nusaputera'}</span>
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+                <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
+                  Dewan Penguji
+                </span>
+                <p className="font-semibold text-slate-800 dark:text-slate-200 mt-1">
+                  1. {thesis.examiner1?.name || 'Penguji 1 (Belum ditentukan)'}
+                </p>
+                <p className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5">
+                  2. {thesis.examiner2?.name || 'Penguji 2 (Belum ditentukan)'}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* RUBRIK & FORM PENILAIAN SIDANG (KONDISIONAL: FITUR 4 ON) */}
+        {featureSettings.defense_scoring && (
+          <div className="space-y-4">
+            <DefenseScoringCard
+              thesisId={thesis.id}
+              existingScore={existingScore}
+              currentUserId={user.id}
+              roleLabel={roleLabel}
+            />
+
+            {/* REKAPITULASI NILAI DARI SEMUA PENGUJI / PEMBIMBING */}
+            {allDefenseScores.length > 0 && (
+              <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      Rekap Nilai Sidang Masuk ({allDefenseScores.length})
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+                  {allDefenseScores.map((sc) => (
+                    <div key={sc.id} className="py-2.5 flex items-center justify-between gap-3">
+                      <div>
+                        <strong className="text-slate-800 dark:text-slate-200">
+                          {sc.examiner?.name || 'Guru Penguji/Pembimbing'}
+                        </strong>
+                        <span className="text-[11px] text-slate-500 dark:text-slate-400 ml-2 capitalize font-mono">
+                          ({sc.examiner_role})
+                        </span>
+                        {sc.notes && (
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400 italic mt-0.5">
+                            &quot;{sc.notes}&quot;
+                          </p>
+                        )}
+                      </div>
+                      <div className="text-right">
+                        <span className="font-extrabold text-purple-600 dark:text-purple-400 text-sm">
+                          {sc.final_score}
+                        </span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-1">/ 100</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* BAGIAN 1: REVISI BERKAS NASKAH BAB */}
         <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">

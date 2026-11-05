@@ -7,6 +7,7 @@ import {
   Calendar,
   Clock,
   ShieldCheck,
+  BookOpen,
 } from "lucide-react";
 import type { Milestone } from "@/types/database";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -51,6 +52,13 @@ export default async function Home() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link
+              href="/repository"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-xl"
+            >
+              <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span>Koleksi KTI</span>
+            </Link>
             <ThemeToggle />
             <Link
               href="/login"
@@ -81,7 +89,7 @@ export default async function Home() {
             </p>
           </div>
 
-          {/* DUA TOMBOL AKSI UTAMA */}
+          {/* TOMBOL AKSI UTAMA */}
           <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href="/login"
@@ -96,6 +104,13 @@ export default async function Home() {
             >
               <UserPlus className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>Pendaftaran Siswa Baru</span>
+            </Link>
+            <Link
+              href="/repository"
+              className="px-5 py-2.5 text-sm font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-900/60 rounded-xl flex items-center justify-center gap-2 seamless-btn"
+            >
+              <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span>Perpustakaan KTI</span>
             </Link>
           </div>
 

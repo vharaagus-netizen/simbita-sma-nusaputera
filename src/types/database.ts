@@ -17,6 +17,7 @@ export interface Profile {
   role: UserRole
   class_or_dept: string | null
   phone: string | null
+  phone_number?: string | null
   created_at: string
   updated_at: string
 }
@@ -29,11 +30,19 @@ export interface Thesis {
   title: string
   description: string | null
   status: ThesisStatus
+  defense_date?: string | null
+  defense_location?: string | null
+  examiner1_id?: string | null
+  examiner2_id?: string | null
+  is_published_to_repo?: boolean
   created_at: string
   updated_at: string
   leader?: Profile
   member?: Profile
   mentor?: Profile
+  examiner1?: Profile
+  examiner2?: Profile
+  scores?: DefenseScore[]
 }
 
 export interface GuidanceSession {
@@ -82,3 +91,24 @@ export interface Notification {
   created_at: string
 }
 
+export interface AppSetting {
+  key: string
+  value: any
+  description: string | null
+  updated_at: string
+}
+
+export interface DefenseScore {
+  id: string
+  thesis_id: string
+  examiner_id: string
+  examiner_role: 'pembimbing' | 'penguji1' | 'penguji2' | string
+  score_presentation: number
+  score_content: number
+  score_mastery: number
+  final_score: number
+  notes: string | null
+  created_at: string
+  updated_at: string
+  examiner?: Profile
+}
