@@ -131,3 +131,4 @@ export default function ExportExcelButton({ theses }: ExportThesesProps) {
     </button>
   )
 }
+

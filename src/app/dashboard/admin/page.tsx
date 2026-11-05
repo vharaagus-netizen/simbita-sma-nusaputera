@@ -19,6 +19,7 @@ import AdminCreateForm from './admin-create-form'
 import ExportExcelButton from './export-button'
 import FeatureToggles from './feature-toggles'
 import DefenseScheduleSection from './defense-schedule-section'
+import UserManagement from './user-management'
 import { getFeatureSettings } from '@/lib/settings'
 import { ThemeToggle } from '@/components/theme-toggle'
 
@@ -87,6 +88,14 @@ export default async function AdminDashboardPage() {
     .order('name', { ascending: true })
 
   const students = (studentsData || []) as Profile[]
+
+  // 4. Ambil semua akun pengguna untuk Manajemen Pengguna
+  const { data: allUsersData } = await supabase
+    .from('profiles')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  const allUsers = (allUsersData || []) as Profile[]
 
   // Statistik ringkas
   const totalTheses = theses.length
@@ -277,77 +286,8 @@ export default async function AdminDashboardPage() {
           )}
         </div>
 
-        {/* DAFTAR GURU & SISWA */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* DAFTAR GURU */}
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none space-y-3 seamless-card">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                <span>Daftar Guru Pembimbing ({mentors.length})</span>
-              </h3>
-            </div>
-
-            {mentors.length === 0 ? (
-              <p className="text-xs text-slate-400 dark:text-slate-500 py-4 text-center">
-                Belum ada guru yang terdaftar. Buat akun guru dengan tombol di atas.
-              </p>
-            ) : (
-              <div className="divide-y divide-slate-100 dark:divide-slate-800/60 max-h-72 overflow-y-auto">
-                {mentors.map((m) => {
-                  const assignedCount = theses.filter((t) => t.mentor_id === m.id).length
-                  return (
-                    <div key={m.id} className="py-2.5 flex items-center justify-between text-xs">
-                      <div>
-                        <p className="font-semibold text-slate-800 dark:text-slate-200">{m.name}</p>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                          {m.class_or_dept || 'Guru'} • Kode:{' '}
-                          <span className="text-purple-600 dark:text-purple-400 font-semibold font-mono">{m.identifier}</span>
-                        </p>
-                      </div>
-                      <span className="text-[11px] font-semibold bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 px-2.5 py-0.5 rounded-full border border-purple-200/60 dark:border-purple-800/50">
-                        {assignedCount} Kelompok
-                      </span>
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* DAFTAR SISWA */}
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none space-y-3 seamless-card">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-                <User className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <span>Daftar Siswa Terdaftar ({students.length})</span>
-              </h3>
-            </div>
-
-            {students.length === 0 ? (
-              <p className="text-xs text-slate-400 dark:text-slate-500 py-4 text-center">
-                Belum ada siswa yang mendaftar.
-              </p>
-            ) : (
-              <div className="divide-y divide-slate-100 dark:divide-slate-800/60 max-h-72 overflow-y-auto">
-                {students.map((s) => (
-                  <div key={s.id} className="py-2.5 flex items-center justify-between text-xs">
-                    <div>
-                      <p className="font-semibold text-slate-800 dark:text-slate-200">{s.name}</p>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                        {s.class_or_dept || 'Siswa SMA'} • Kode:{' '}
-                        <span className="text-blue-600 dark:text-blue-400 font-semibold font-mono">{s.identifier}</span>
-                      </p>
-                    </div>
-                    <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-                      {s.identifier}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
+        {/* MANAJEMEN PENGGUNA (SISWA & GURU) */}
+        <UserManagement initialUsers={allUsers} />
       </main>
     </div>
   )

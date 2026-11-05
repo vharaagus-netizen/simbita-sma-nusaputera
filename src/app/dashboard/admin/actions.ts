@@ -205,3 +205,140 @@ export async function submitDefenseScore(formData: FormData) {
   revalidatePath(`/dashboard/mentor/group/${thesisId}`)
   return { success: true }
 }
+
+// -------------------------------------------------------------
+// MANAJEMEN PENGGUNA (EDIT, RESET PASSWORD, NONAKTIFKAN, HAPUS)
+// -------------------------------------------------------------
+
+// 1. UPDATE DATA PENGGUNA
+export async function updateUserProfile(formData: FormData) {
+  const userId = formData.get('user_id') as string
+  const name = (formData.get('name') as string)?.trim()
+  const classOrDept = (formData.get('class_or_dept') as string)?.trim() || null
+  const phone = (formData.get('phone_number') as string)?.trim() || null
+  const role = formData.get('role') as 'student' | 'mentor' | 'admin'
+
+  if (!userId || !name || !role) {
+    return { error: 'ID Pengguna, Nama, dan Peran wajib diisi.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+    const { error } = await adminSupabase
+      .from('profiles')
+      .update({
+        name,
+        class_or_dept: classOrDept,
+        phone,
+        phone_number: phone,
+        role,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', userId)
+
+    if (error) {
+      return { error: 'Gagal memperbarui profil pengguna: ' + error.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    return { success: true, message: 'Data pengguna berhasil diperbarui.' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
+
+// 2. TOGGLE STATUS AKTIF / NONAKTIF (SOFT DEACTIVATE)
+export async function toggleUserActiveStatus(userId: string, currentStatus: boolean) {
+  if (!userId) {
+    return { error: 'ID Pengguna tidak valid.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+    const newStatus = !currentStatus
+
+    const { error } = await adminSupabase
+      .from('profiles')
+      .update({
+        is_active: newStatus,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', userId)
+
+    if (error) {
+      return { error: 'Gagal mengubah status pengguna: ' + error.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    return {
+      success: true,
+      message: newStatus
+        ? 'Akun pengguna berhasil diaktifkan kembali.'
+        : 'Akun pengguna berhasil dinonaktifkan (arsip aman, KTI tidak hilang).',
+    }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
+
+// 3. RESET PASSWORD PENGGUNA OLEH ADMIN
+export async function resetUserPassword(userId: string, newPassword: string) {
+  if (!userId || !newPassword) {
+    return { error: 'ID Pengguna dan Password baru wajib diisi.' }
+  }
+
+  if (newPassword.length < 6) {
+    return { error: 'Kata sandi baru minimal 6 karakter.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+    const { error } = await adminSupabase.auth.admin.updateUserById(userId, {
+      password: newPassword,
+    })
+
+    if (error) {
+      return { error: 'Gagal mereset kata sandi: ' + error.message }
+    }
+
+    return { success: true, message: 'Kata sandi baru berhasil disimpan!' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
+
+// 4. HAPUS AKUN AMAN (DENGAN PROTEKSI DATA KTI)
+export async function deleteUserAccount(userId: string) {
+  if (!userId) {
+    return { error: 'ID Pengguna tidak valid.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+
+    // Cek apakah pengguna terhubung dengan karya KTI / bimbingan tugas akhir
+    const { data: linkedTheses } = await adminSupabase
+      .from('theses')
+      .select('id, title')
+      .or(`leader_id.eq.${userId},member_id.eq.${userId},mentor_id.eq.${userId}`)
+      .limit(1)
+
+    if (linkedTheses && linkedTheses.length > 0) {
+      return {
+        error: `TIDAK DAPAT DIHAPUS PERMANEN! Pengguna ini terdaftar sebagai penulis/pembimbing pada KTI: "${linkedTheses[0].title}". Silakan gunakan tombol "Nonaktifkan Akun" agar karya ilmiah di Repositori Publik tidak rusak atau hilang.`,
+      }
+    }
+
+    // Jika akun tidak memiliki KTI (misal akun uji coba / salah daftar), hapus bersih dari auth.users
+    const { error: deleteAuthError } = await adminSupabase.auth.admin.deleteUser(userId)
+
+    if (deleteAuthError) {
+      return { error: 'Gagal menghapus akun: ' + deleteAuthError.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    return { success: true, message: 'Akun pengguna berhasil dihapus permanen.' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}

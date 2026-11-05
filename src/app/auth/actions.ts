@@ -41,12 +41,20 @@ export async function login(formData: FormData) {
   }
 
   if (data.user) {
-    // Ambil peran pengguna dari profiles
+    // Ambil peran dan status aktif pengguna dari profiles
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role')
+      .select('role, is_active')
       .eq('id', data.user.id)
       .single()
+
+    if (profile && profile.is_active === false) {
+      await supabase.auth.signOut()
+      return {
+        error:
+          'Akun Anda telah dinonaktifkan / diarsipkan oleh Administrator. Silakan hubungi koordinator sekolah jika ini keliru.',
+      }
+    }
 
     const role = profile?.role || 'student'
 

@@ -18,6 +18,7 @@ export interface Profile {
   class_or_dept: string | null
   phone: string | null
   phone_number?: string | null
+  is_active?: boolean
   created_at: string
   updated_at: string
 }
