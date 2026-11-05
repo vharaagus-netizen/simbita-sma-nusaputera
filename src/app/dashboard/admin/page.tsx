@@ -14,11 +14,11 @@ import {
   Sparkles,
 } from 'lucide-react'
 import type { Thesis, Profile } from '@/types/database'
-import PlottingRow from './plotting-row'
 import AdminCreateForm from './admin-create-form'
 import ExportExcelButton from './export-button'
 import FeatureToggles from './feature-toggles'
 import DefenseScheduleSection from './defense-schedule-section'
+import GroupManagement from './group-management'
 import UserManagement from './user-management'
 import { getFeatureSettings } from '@/lib/settings'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -213,78 +213,8 @@ export default async function AdminDashboardPage() {
           <DefenseScheduleSection theses={theses} mentors={mentors} />
         )}
 
-        {/* TABEL PLOTTING MANUAL GURU KE KELOMPOK */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xs dark:shadow-none overflow-hidden seamless-card">
-          <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-            <div>
-              <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
-                Plotting Guru Pembimbing ke Kelompok Siswa
-              </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Tugaskan 1 guru pembimbing untuk membimbing tiap kelompok (2 siswa)
-              </p>
-            </div>
-            <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-xl">
-              {theses.length} Kelompok
-            </span>
-          </div>
-
-          {theses.length === 0 ? (
-            <div className="text-center py-12 text-xs text-slate-400 dark:text-slate-500">
-              Belum ada kelompok siswa yang mengajukan judul tugas akhir.
-            </div>
-          ) : (
-            <div className="divide-y divide-slate-100 dark:divide-slate-800/60">
-              {theses.map((t) => (
-                <div key={t.id} className="p-5 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                    <div className="space-y-1.5 flex-1 min-w-0 max-w-xl">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-bold text-slate-900 dark:text-slate-100 text-sm break-words break-all [overflow-wrap:anywhere]">
-                          {t.title}
-                        </span>
-                        <span
-                          className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full shrink-0 ${
-                            t.mentor_id
-                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/50'
-                              : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/50'
-                          }`}
-                        >
-                          {t.mentor_id ? 'Sudah Ada Pembimbing' : 'Menunggu Plotting'}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-                        <div>
-                          <span>Siswa 1 (Ketua): </span>
-                          <strong className="text-slate-800 dark:text-slate-200">{t.leader?.name}</strong>{' '}
-                          <span className="text-blue-600 dark:text-blue-400 font-mono">({t.leader?.identifier})</span>
-                        </div>
-                        <span>•</span>
-                        <div>
-                          <span>Siswa 2 (Anggota): </span>
-                          <strong className="text-slate-800 dark:text-slate-200">{t.member?.name || 'Belum ada'}</strong>{' '}
-                          {t.member && (
-                            <span className="text-blue-600 dark:text-blue-400 font-mono">({t.member?.identifier})</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SELECTOR PLOTTING GURU */}
-                    <div className="shrink-0">
-                      <PlottingRow
-                        thesisId={t.id}
-                        currentMentorId={t.mentor_id}
-                        mentors={mentors}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* FITUR PENGATUR KELOMPOK KTI & PLOTTING PEMBIMBING */}
+        <GroupManagement initialTheses={theses} students={students} mentors={mentors} />
 
         {/* MANAJEMEN PENGGUNA (SISWA & GURU) */}
         <UserManagement initialUsers={allUsers} />

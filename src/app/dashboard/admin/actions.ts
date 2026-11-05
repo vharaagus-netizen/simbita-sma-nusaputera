@@ -342,3 +342,156 @@ export async function deleteUserAccount(userId: string) {
     return { error: err.message || 'Terjadi kesalahan sistem.' }
   }
 }
+
+// -------------------------------------------------------------
+// PENGATUR KELOMPOK (BUAT, EDIT ANGGOTA/JUDUL, GANTI STATUS, HAPUS)
+// -------------------------------------------------------------
+
+// 1. BUAT KELOMPOK BARU LANGSUNG OLEH ADMIN
+export async function adminCreateThesisGroup(formData: FormData) {
+  const title = (formData.get('title') as string)?.trim()
+  const description = (formData.get('description') as string)?.trim() || null
+  const leaderId = formData.get('leader_id') as string
+  const memberId = (formData.get('member_id') as string) || null
+  const mentorId = (formData.get('mentor_id') as string) || null
+  const status = (formData.get('status') as string) || 'in_progress'
+
+  if (!title || !leaderId) {
+    return { error: 'Judul KTI dan Siswa 1 (Ketua) wajib diisi.' }
+  }
+
+  if (memberId && leaderId === memberId) {
+    return { error: 'Ketua kelompok dan Anggota tidak boleh siswa yang sama.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+
+    // Cek apakah ketua sudah terdaftar di kelompok aktif lain
+    const { data: existingLeader } = await adminSupabase
+      .from('theses')
+      .select('id, title')
+      .or(`leader_id.eq.${leaderId},member_id.eq.${leaderId}`)
+      .limit(1)
+
+    if (existingLeader && existingLeader.length > 0) {
+      return {
+        error: `Siswa ketua sudah terdaftar di kelompok KTI lain: "${existingLeader[0].title}".`,
+      }
+    }
+
+    if (memberId) {
+      const { data: existingMember } = await adminSupabase
+        .from('theses')
+        .select('id, title')
+        .or(`leader_id.eq.${memberId},member_id.eq.${memberId}`)
+        .limit(1)
+
+      if (existingMember && existingMember.length > 0) {
+        return {
+          error: `Siswa anggota sudah terdaftar di kelompok KTI lain: "${existingMember[0].title}".`,
+        }
+      }
+    }
+
+    const { error: insertError } = await adminSupabase.from('theses').insert({
+      title,
+      description,
+      leader_id: leaderId,
+      member_id: memberId,
+      mentor_id: mentorId,
+      status,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+
+    if (insertError) {
+      return { error: 'Gagal membuat kelompok: ' + insertError.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    revalidatePath('/dashboard/student')
+    revalidatePath('/dashboard/mentor')
+    revalidatePath('/repository')
+    return { success: true, message: 'Kelompok tugas akhir berhasil dibuat!' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
+
+// 2. EDIT ANGGOTA, JUDUL, DESKRIPSI, DAN STATUS KELOMPOK
+export async function adminUpdateThesisGroup(formData: FormData) {
+  const thesisId = formData.get('thesis_id') as string
+  const title = (formData.get('title') as string)?.trim()
+  const description = (formData.get('description') as string)?.trim() || null
+  const leaderId = formData.get('leader_id') as string
+  const memberId = (formData.get('member_id') as string) || null
+  const mentorId = (formData.get('mentor_id') as string) || null
+  const status = formData.get('status') as string
+
+  if (!thesisId || !title || !leaderId) {
+    return { error: 'ID Kelompok, Judul KTI, dan Siswa 1 (Ketua) wajib diisi.' }
+  }
+
+  if (memberId && leaderId === memberId) {
+    return { error: 'Ketua kelompok dan Anggota tidak boleh siswa yang sama.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+
+    const { error: updateError } = await adminSupabase
+      .from('theses')
+      .update({
+        title,
+        description,
+        leader_id: leaderId,
+        member_id: memberId,
+        mentor_id: mentorId,
+        status,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', thesisId)
+
+    if (updateError) {
+      return { error: 'Gagal memperbarui kelompok: ' + updateError.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    revalidatePath('/dashboard/student')
+    revalidatePath('/dashboard/mentor')
+    revalidatePath(`/dashboard/mentor/group/${thesisId}`)
+    revalidatePath('/repository')
+    return { success: true, message: 'Data kelompok berhasil diperbarui!' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
+
+// 3. HAPUS KELOMPOK BATAL / DUPLIKAT
+export async function adminDeleteThesisGroup(thesisId: string) {
+  if (!thesisId) {
+    return { error: 'ID Kelompok tidak valid.' }
+  }
+
+  try {
+    const adminSupabase = createAdminClient()
+
+    const { error: deleteError } = await adminSupabase
+      .from('theses')
+      .delete()
+      .eq('id', thesisId)
+
+    if (deleteError) {
+      return { error: 'Gagal menghapus kelompok: ' + deleteError.message }
+    }
+
+    revalidatePath('/dashboard/admin')
+    revalidatePath('/dashboard/student')
+    revalidatePath('/dashboard/mentor')
+    revalidatePath('/repository')
+    return { success: true, message: 'Kelompok berhasil dihapus.' }
+  } catch (err: any) {
+    return { error: err.message || 'Terjadi kesalahan sistem.' }
+  }
+}
