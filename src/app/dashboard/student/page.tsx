@@ -226,17 +226,22 @@ export default async function StudentDashboard() {
                     />
                   )}
 
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/50">
-                    {thesis.status === 'pending_mentor'
-                      ? 'Menunggu Plotting Guru'
-                      : thesis.status === 'title_approved'
-                      ? 'Judul Disetujui'
-                      : thesis.status === 'in_progress'
-                      ? 'Sedang Bimbingan'
-                      : thesis.status === 'completed'
-                      ? 'ACC Final / Siap Sidang'
-                      : thesis.status}
-                  </span>
+                  {thesis.status === 'completed' ? (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>Siap Sidang (ACC Final)</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 border border-amber-200/80 dark:border-amber-800/50">
+                      {thesis.status === 'pending_mentor'
+                        ? 'Menunggu Plotting Guru'
+                        : thesis.status === 'title_approved'
+                        ? 'Judul Disetujui'
+                        : thesis.status === 'in_progress'
+                        ? 'Sedang Bimbingan'
+                        : thesis.status}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -411,7 +416,7 @@ export default async function StudentDashboard() {
                     Cetak Lembar Kontrol & Kartu Bimbingan Digital
                   </h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Dokumen resmi siap cetak (A4/PDF) berisi riwayat revisi dan paraf konsultasi untuk syarat sidang.
+                    Dokumen resmi siap cetak (A4/PDF) berisi seluruh rekapitulasi riwayat revisi dan paraf konsultasi bimbingan.
                   </p>
                 </div>
               </div>

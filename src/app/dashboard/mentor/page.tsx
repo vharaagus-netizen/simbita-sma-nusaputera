@@ -11,6 +11,7 @@ import {
   MapPin,
   Sparkles,
   Award,
+  CheckCircle2,
 } from 'lucide-react'
 import type { Thesis, Profile } from '@/types/database'
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -284,15 +285,20 @@ export default async function MentorDashboard() {
                       </p>
                     </div>
 
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50 shrink-0 self-start sm:self-auto">
-                      {group.status === 'pending_mentor'
-                        ? 'Menunggu Review Judul'
-                        : group.status === 'in_progress'
-                        ? 'Sedang Bimbingan'
-                        : group.status === 'completed'
-                        ? 'ACC Final'
-                        : group.status}
-                    </span>
+                    {group.status === 'completed' ? (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shrink-0 self-start sm:self-auto">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>Siap Sidang</span>
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50 shrink-0 self-start sm:self-auto">
+                        {group.status === 'pending_mentor'
+                          ? 'Menunggu Review Judul'
+                          : group.status === 'in_progress'
+                          ? 'Sedang Bimbingan'
+                          : group.status}
+                      </span>
+                    )}
                   </div>
 
                   <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-xs">

@@ -16,6 +16,7 @@ import {
 import ReviewForm from './review-form'
 import VerifyJournalButton from './verify-button'
 import DefenseScoringCard from './defense-scoring-card'
+import DefenseReadyToggle from './defense-ready-toggle'
 import type { Thesis, GuidanceSession, GuidanceJournal, Profile, DefenseScore } from '@/types/database'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { getFeatureSettings } from '@/lib/settings'
@@ -148,9 +149,17 @@ export default async function MentorGroupDetailPage({
               </p>
             </div>
 
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/50 shrink-0 self-start sm:self-auto">
-              {thesis.status === 'completed' ? 'ACC Final / Siap Sidang' : 'Sedang Bimbingan'}
-            </span>
+            {thesis.status === 'completed' ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shrink-0 self-start sm:self-auto">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                <span>Siap Sidang (ACC Final)</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50 shrink-0 self-start sm:self-auto">
+                <Clock className="w-3.5 h-3.5 text-blue-500" />
+                <span>Sedang Bimbingan</span>
+              </span>
+            )}
           </div>
 
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-6 text-xs text-slate-600 dark:text-slate-300">
@@ -172,10 +181,17 @@ export default async function MentorGroupDetailPage({
             </div>
             <div>
               <span className="text-slate-400 dark:text-slate-500">Jurnal Tervalidasi: </span>
-              <strong className="text-slate-800 dark:text-slate-100">{verifiedJournalsCount} / 6 Pertemuan</strong>
+              <strong className="text-slate-800 dark:text-slate-100">{verifiedJournalsCount} Pertemuan Diparaf</strong>
             </div>
           </div>
         </div>
+
+        {/* TOMBOL KESIAPAN SIDANG OLEH GURU PEMBIMBING */}
+        <DefenseReadyToggle
+          groupId={thesis.id}
+          currentStatus={thesis.status}
+          isMentorOrAdmin={thesis.mentor_id === user.id}
+        />
 
         {/* JADWAL SIDANG KTI (KONDISIONAL: FITUR 1 ON) */}
         {featureSettings.defense_scheduling && (thesis.defense_date || thesis.defense_location) && (

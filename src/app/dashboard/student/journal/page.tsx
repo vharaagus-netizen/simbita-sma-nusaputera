@@ -8,14 +8,13 @@ import {
   Clock,
   MapPin,
   FileCheck,
+  GraduationCap,
 } from 'lucide-react'
 import JournalForm from './journal-form'
 import type { Thesis, GuidanceJournal, Profile } from '@/types/database'
 import { ThemeToggle } from '@/components/theme-toggle'
 
 export const dynamic = 'force-dynamic'
-
-const MIN_MEETINGS = 6
 
 export default async function StudentJournalPage() {
   const supabase = await createClient()
@@ -55,12 +54,8 @@ export default async function StudentJournalPage() {
 
   const journals = (journalsData || []) as GuidanceJournal[]
 
-  // Hitung jumlah bimbingan yang sudah divalidasi/diparaf oleh guru
+  // Hitung jumlah bimbingan yang sudah divalidasi/diparaf oleh guru (fleksibel tanpa batas)
   const verifiedCount = journals.filter((j) => j.is_verified).length
-  const progressPercent = Math.min(
-    100,
-    Math.round((verifiedCount / MIN_MEETINGS) * 100)
-  )
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-8 px-4 sm:px-6 transition-colors duration-200">
@@ -76,7 +71,24 @@ export default async function StudentJournalPage() {
           <ThemeToggle />
         </div>
 
-        {/* HEADER & INDIKATOR SYARAT SIDANG */}
+        {/* NOTIFIKASI JIKA GURU SUDAH MEMBERIKAN SIAP SIDANG */}
+        {thesis.status === 'completed' && (
+          <div className="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800/60 rounded-2xl p-5 shadow-xs flex items-start sm:items-center gap-3.5 text-xs text-emerald-900 dark:text-emerald-200 animate-fade-in seamless-card">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <GraduationCap className="w-5 h-5" />
+            </div>
+            <div>
+              <strong className="font-bold text-sm text-emerald-950 dark:text-emerald-100 block">
+                Selamat! Kelompok Anda Telah Dinyatakan Siap Sidang (ACC Final)
+              </strong>
+              <p className="text-emerald-800/90 dark:text-emerald-300/90 mt-0.5 leading-relaxed">
+                Guru Pembimbing telah menyetujui seluruh naskah dan logbook bimbingan Anda. Panitia sekolah dapat segera menjadwalkan tanggal dan dewan penguji Sidang KTI Anda.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* HEADER & INDIKATOR BIMBINGAN */}
         <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 overflow-hidden seamless-card">
           <div className="flex-1 min-w-0">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
@@ -93,39 +105,33 @@ export default async function StudentJournalPage() {
             </p>
           </div>
 
-          {/* INDIKATOR PEMENUHAN MINIMAL 6X */}
-          <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-4 shrink-0 text-center sm:text-right shadow-2xs">
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              Progres Bimbingan Tervalidasi
+          {/* INDIKATOR STATUS DARI PEMBIMBING */}
+          <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-4 shrink-0 text-center sm:text-right shadow-2xs space-y-1">
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+              Pertemuan Diparaf Guru
             </span>
-            <div className="flex items-center justify-center sm:justify-end gap-2 mt-1">
+            <div className="flex items-center justify-center sm:justify-end gap-1.5">
               <span className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">
                 {verifiedCount}
               </span>
-              <span className="text-xs text-slate-400 dark:text-slate-500 font-bold">
-                / {MIN_MEETINGS} Pertemuan
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                Sesi Terlaksana
               </span>
             </div>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
-              {verifiedCount >= MIN_MEETINGS ? (
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold">
-                  ✓ Syarat minimal terpenuhi untuk sidang
+
+            {/* STATUS REKOMENDASI SIDANG */}
+            <div className="pt-1">
+              {thesis.status === 'completed' ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>Siap Sidang</span>
                 </span>
               ) : (
-                `Butuh ${MIN_MEETINGS - verifiedCount} pertemuan lagi untuk syarat sidang`
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50">
+                  <Clock className="w-3.5 h-3.5 text-blue-500" />
+                  <span>Bimbingan Berjalan</span>
+                </span>
               )}
-            </p>
-
-            {/* PROGRESS BAR */}
-            <div className="w-full sm:w-48 bg-slate-200 dark:bg-slate-700 h-2 rounded-full mt-2.5 overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-500 ${
-                  verifiedCount >= MIN_MEETINGS
-                    ? 'bg-emerald-600 dark:bg-emerald-500'
-                    : 'bg-blue-600 dark:bg-blue-500'
-                }`}
-                style={{ width: `${progressPercent}%` }}
-              />
             </div>
           </div>
         </div>

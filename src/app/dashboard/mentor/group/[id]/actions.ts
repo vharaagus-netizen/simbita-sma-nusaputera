@@ -74,8 +74,9 @@ export async function verifyGuidanceJournal(formData: FormData) {
   return { success: true }
 }
 
-export async function finalizeThesisACC(formData: FormData) {
+export async function toggleDefenseReady(formData: FormData) {
   const groupId = formData.get('group_id') as string
+  const targetStatus = (formData.get('status') as string) || 'completed'
 
   if (!groupId) {
     return { error: 'ID kelompok tidak valid.' }
@@ -83,19 +84,56 @@ export async function finalizeThesisACC(formData: FormData) {
 
   const supabase = await createClient()
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    return { error: 'Sesi login telah berakhir.' }
+  }
+
+  // Verifikasi otorisasi: hanya mentor kelompok atau admin yang bisa mengubah status
+  const { data: thesis } = await supabase
+    .from('theses')
+    .select('mentor_id')
+    .eq('id', groupId)
+    .single()
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  const isMentor = thesis?.mentor_id === user.id
+  const isAdmin = profile?.role === 'admin'
+
+  if (!isMentor && !isAdmin) {
+    return { error: 'Hanya Guru Pembimbing atau Admin yang berhak menyetujui Siap Sidang.' }
+  }
+
   const { error: updateError } = await supabase
     .from('theses')
     .update({
-      status: 'completed',
+      status: targetStatus,
       updated_at: new Date().toISOString(),
     })
     .eq('id', groupId)
 
   if (updateError) {
-    return { error: 'Gagal memberikan ACC Final: ' + updateError.message }
+    return { error: 'Gagal memperbarui status kesiapan sidang: ' + updateError.message }
   }
 
   revalidatePath(`/dashboard/mentor/group/${groupId}`)
+  revalidatePath('/dashboard/mentor')
+  revalidatePath('/dashboard/student')
+  revalidatePath('/dashboard/student/journal')
+  revalidatePath('/dashboard/admin')
+
   return { success: true }
+}
+
+export async function finalizeThesisACC(formData: FormData) {
+  return toggleDefenseReady(formData)
 }
 
