@@ -65,7 +65,7 @@ export default async function PrintGuidanceCardPage() {
   })
 
   return (
-    <div className="min-h-screen bg-slate-100/60 dark:bg-[#090d16] print:bg-white py-6 px-4 sm:px-6 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#0F0F12] print:bg-white py-6 px-4 sm:px-6 transition-colors duration-200">
       <div className="max-w-4xl mx-auto animate-fade-in">
         {/* TOMBOL AKSI KEMBALI & PRINT */}
         <PrintActionButtons />

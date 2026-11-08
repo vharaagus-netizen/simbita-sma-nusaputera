@@ -42,14 +42,14 @@ export default function FeatureToggles({
   }
 
   return (
-    <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none space-y-4 seamless-card">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+    <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none space-y-4 seamless-card">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
             <Sliders className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+            <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Saklar Pengaktifan Fitur Tambahan (On / Off)
             </h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -68,11 +68,11 @@ export default function FeatureToggles({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* FITUR 1: SAKLAR PENJADWALAN SIDANG */}
-        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 transition-colors">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-pink-200/60 dark:border-[#2E2838] bg-white/80 dark:bg-[#15131C] transition-colors">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="font-bold text-slate-900 dark:text-slate-100 text-xs">
+              <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+              <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-xs">
                 Fitur 1: Penjadwalan Sidang KTI
               </span>
             </div>
@@ -97,8 +97,8 @@ export default function FeatureToggles({
             type="button"
             onClick={() => handleToggle('feature_defense_scheduling')}
             disabled={loadingKey === 'feature_defense_scheduling'}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600/30 ${
-              scheduling ? 'bg-blue-600' : 'bg-slate-300 dark:bg-slate-700'
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E11D48]/30 ${
+              scheduling ? 'bg-[#E11D48] dark:bg-[#F472B6]' : 'bg-slate-300 dark:bg-slate-700'
             }`}
           >
             <span
@@ -110,11 +110,11 @@ export default function FeatureToggles({
         </div>
 
         {/* FITUR 4: SAKLAR RUBRIK & FORM PENILAIAN */}
-        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 transition-colors">
+        <div className="flex items-start justify-between gap-4 p-4 rounded-xl border border-pink-200/60 dark:border-[#2E2838] bg-white/80 dark:bg-[#15131C] transition-colors">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <Award className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <span className="font-bold text-slate-900 dark:text-slate-100 text-xs">
+              <Award className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+              <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-xs">
                 Fitur 4: Rubrik Penilaian Sidang
               </span>
             </div>
@@ -139,8 +139,8 @@ export default function FeatureToggles({
             type="button"
             onClick={() => handleToggle('feature_defense_scoring')}
             disabled={loadingKey === 'feature_defense_scoring'}
-            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-600/30 ${
-              scoring ? 'bg-purple-600' : 'bg-slate-300 dark:bg-slate-700'
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#E11D48]/30 ${
+              scoring ? 'bg-[#E11D48] dark:bg-[#F472B6]' : 'bg-slate-300 dark:bg-slate-700'
             }`}
           >
             <span

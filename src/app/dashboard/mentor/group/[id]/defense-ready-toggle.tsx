@@ -102,13 +102,13 @@ export default function DefenseReadyToggle({
         </div>
       ) : (
         /* KONDISI 2: BELUM SIAP SIDANG (DALAM PROSES BIMBINGAN) */
-        <div className="bg-white dark:bg-[#111927] border border-blue-200/80 dark:border-blue-900/50 rounded-2xl p-5 shadow-xs dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 seamless-card">
           <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-pink-100 dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/60 text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center shrink-0">
               <GraduationCap className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+              <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                 Rekomendasi Kesiapan Sidang KTI
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
@@ -140,3 +140,4 @@ export default function DefenseReadyToggle({
     </div>
   )
 }
+

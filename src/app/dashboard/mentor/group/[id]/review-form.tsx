@@ -43,7 +43,7 @@ export default function ReviewForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-3 p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 space-y-3 transition-colors">
+    <form onSubmit={handleSubmit} className="mt-3 p-4 bg-white/80 dark:bg-[#1E1B24] rounded-xl border border-pink-200/80 dark:border-[#2E2838] space-y-3 transition-colors">
       <div className="flex items-center justify-between">
         <label className="text-xs font-bold text-slate-800 dark:text-slate-200">
           Penilaian & Umpan Balik Guru Pembimbing:
@@ -88,7 +88,7 @@ export default function ReviewForm({
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}
           placeholder="Tuliskan catatan perbaikan atau arahan spesifik untuk kelompok siswa..."
-          className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-indigo-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 dark:focus:ring-indigo-500/20 transition-colors"
+          className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
         />
       </div>
 
@@ -96,7 +96,7 @@ export default function ReviewForm({
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold text-xs transition-colors shadow-xs disabled:opacity-60 seamless-btn"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs transition-colors shadow-xs disabled:opacity-60 seamless-btn"
         >
           <Send className="w-3.5 h-3.5" />
           <span>{loading ? 'Menyimpan...' : 'Simpan Catatan & Status'}</span>

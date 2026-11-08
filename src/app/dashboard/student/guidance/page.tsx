@@ -61,12 +61,12 @@ export default async function StudentGuidancePage() {
   })[]
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-8 px-4 sm:px-6 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] py-8 px-4 sm:px-6 transition-colors duration-200">
       <div className="max-w-4xl mx-auto w-full space-y-6 animate-fade-in">
         <div className="flex items-center justify-between">
           <Link
             href="/dashboard/student"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Dashboard Utama</span>
@@ -75,26 +75,26 @@ export default async function StudentGuidancePage() {
         </div>
 
         {/* HEADER PROYEK */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none overflow-hidden seamless-card">
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none overflow-hidden seamless-card">
+          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#E11D48] dark:text-[#FF80AB]">
             Bimbingan Naskah Tugas Akhir
           </span>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1 break-words break-all [overflow-wrap:anywhere]">
+          <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-1 break-words break-all [overflow-wrap:anywhere]">
             {thesis.title}
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Guru Pembimbing:{' '}
-            <strong className="text-slate-700 dark:text-slate-200 font-semibold">
+            <strong className="text-slate-800 dark:text-slate-200 font-semibold">
               {(thesis.mentor as any)?.name || 'Belum di-plot oleh Admin'}
             </strong>
           </p>
         </div>
 
         {/* FORM UNGGAH NASKAH REVISI BARU */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
-          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 dark:border-slate-800 mb-5">
-            <Upload className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
+          <div className="flex items-center gap-2 pb-4 border-b border-pink-200/60 dark:border-[#2E2838] mb-5">
+            <Upload className="w-4 h-4 text-[#E11D48] dark:text-[#F472B6]" />
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Unggah Berkas Naskah Bab Baru (PDF / Word)
             </h2>
           </div>
@@ -103,9 +103,9 @@ export default async function StudentGuidancePage() {
         </div>
 
         {/* RIWAYAT REVISI & CATATAN GURU */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+          <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Riwayat Berkas & Catatan Revisi Guru
             </h2>
             <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -122,18 +122,18 @@ export default async function StudentGuidancePage() {
               {sessions.map((item) => (
                 <div
                   key={item.id}
-                  className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 space-y-3 bg-slate-50/60 dark:bg-slate-800/40 seamless-card"
+                  className="border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 space-y-3 bg-white/70 dark:bg-[#15131C] seamless-card"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                         {item.chapter}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${
                           item.file_type === 'pdf'
                             ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/60 dark:border-rose-900/50'
-                            : 'bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-900/50'
+                            : 'bg-pink-100 dark:bg-pink-950/60 text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/60 dark:border-pink-900/50'
                         }`}
                       >
                         {item.file_type}
@@ -187,7 +187,7 @@ export default async function StudentGuidancePage() {
                         href={item.file_url}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors seamless-btn"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white dark:bg-[#1E1B24] border border-pink-200 dark:border-[#2E2838] text-slate-700 dark:text-slate-300 font-semibold hover:border-[#E11D48] dark:hover:border-[#FF80AB] hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors seamless-btn"
                       >
                         <Download className="w-3.5 h-3.5" />
                         <span>Unduh Berkas</span>
@@ -197,7 +197,7 @@ export default async function StudentGuidancePage() {
 
                   {/* CATATAN SISWA */}
                   {item.student_notes && (
-                    <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs">
+                    <div className="bg-white/80 dark:bg-[#1E1B24] p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] text-xs">
                       <p className="font-semibold text-slate-700 dark:text-slate-300 mb-0.5">
                         Catatan dari Siswa:
                       </p>

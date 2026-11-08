@@ -64,7 +64,7 @@ export default function JournalForm({ thesisId }: { thesisId: string }) {
             type="date"
             defaultValue={today}
             required
-            className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 focus:border-emerald-600 dark:focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 transition-colors"
+            className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-[#15131C] focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
           />
         </div>
 
@@ -81,7 +81,7 @@ export default function JournalForm({ thesisId }: { thesisId: string }) {
             type="text"
             required
             placeholder="Contoh: Ruang Guru, Perpustakaan, Lab IPA"
-            className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-600 dark:focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 transition-colors"
+            className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-[#15131C] placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
           />
         </div>
       </div>
@@ -99,7 +99,7 @@ export default function JournalForm({ thesisId }: { thesisId: string }) {
           rows={3}
           required
           placeholder="Jelaskan secara ringkas poin-poin yang didiskusikan dan arahan langsung dari guru pembimbing saat pertemuan..."
-          className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-600 dark:focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 transition-colors"
+          className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
         />
       </div>
 
@@ -107,7 +107,7 @@ export default function JournalForm({ thesisId }: { thesisId: string }) {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors"
         >
           <PlusCircle className="w-4 h-4" />
           <span>{loading ? 'Menyimpan Jurnal...' : 'Simpan Jurnal Pertemuan'}</span>

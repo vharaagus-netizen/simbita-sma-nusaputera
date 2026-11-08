@@ -58,12 +58,12 @@ export default async function StudentJournalPage() {
   const verifiedCount = journals.filter((j) => j.is_verified).length
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-8 px-4 sm:px-6 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] py-8 px-4 sm:px-6 transition-colors duration-200">
       <div className="max-w-4xl mx-auto w-full space-y-6 animate-fade-in">
         <div className="flex items-center justify-between">
           <Link
             href="/dashboard/student"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Dashboard Utama</span>
@@ -89,29 +89,29 @@ export default async function StudentJournalPage() {
         )}
 
         {/* HEADER & INDIKATOR BIMBINGAN */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 overflow-hidden seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none flex flex-col sm:flex-row sm:items-center justify-between gap-4 overflow-hidden seamless-card">
           <div className="flex-1 min-w-0">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#E11D48] dark:text-[#FF80AB]">
               Logbook Konsultasi Tatap Muka
             </span>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1 break-words break-all [overflow-wrap:anywhere]">
+            <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-1 break-words break-all [overflow-wrap:anywhere]">
               {thesis.title}
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Guru Pembimbing:{' '}
-              <strong className="text-slate-700 dark:text-slate-200 font-semibold">
+              <strong className="text-slate-800 dark:text-slate-200 font-semibold">
                 {(thesis.mentor as any)?.name || 'Belum di-plot oleh Admin'}
               </strong>
             </p>
           </div>
 
           {/* INDIKATOR STATUS DARI PEMBIMBING */}
-          <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 rounded-2xl p-4 shrink-0 text-center sm:text-right shadow-2xs space-y-1">
+          <div className="bg-white/80 dark:bg-[#15131C] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 shrink-0 text-center sm:text-right shadow-2xs space-y-1">
             <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
               Pertemuan Diparaf Guru
             </span>
             <div className="flex items-center justify-center sm:justify-end gap-1.5">
-              <span className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">
+              <span className="text-2xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC]">
                 {verifiedCount}
               </span>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
@@ -127,8 +127,8 @@ export default async function StudentJournalPage() {
                   <span>Siap Sidang</span>
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50">
-                  <Clock className="w-3.5 h-3.5 text-blue-500" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50">
+                  <Clock className="w-3.5 h-3.5 text-[#E11D48] dark:text-[#FF80AB]" />
                   <span>Bimbingan Berjalan</span>
                 </span>
               )}
@@ -137,10 +137,10 @@ export default async function StudentJournalPage() {
         </div>
 
         {/* FORM PENCATATAN PERTEMUAN BARU */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
-          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 dark:border-slate-800 mb-5">
-            <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
+          <div className="flex items-center gap-2 pb-4 border-b border-pink-200/60 dark:border-[#2E2838] mb-5">
+            <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#F472B6]" />
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Catat Pertemuan Konsultasi Baru
             </h2>
           </div>
@@ -149,9 +149,9 @@ export default async function StudentJournalPage() {
         </div>
 
         {/* DAFTAR JURNAL YANG SUDAH TERCATAT */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+          <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Daftar Pertemuan yang Tercatat
             </h2>
             <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -168,14 +168,14 @@ export default async function StudentJournalPage() {
               {journals.map((item, index) => (
                 <div
                   key={item.id}
-                  className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 sm:p-5 space-y-2.5 bg-slate-50/60 dark:bg-slate-800/40 seamless-card"
+                  className="border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 sm:p-5 space-y-2.5 bg-white/70 dark:bg-[#15131C] seamless-card"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-3">
-                      <span className="w-6 h-6 rounded-md bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs flex items-center justify-center shrink-0 border border-emerald-200/60 dark:border-emerald-800/50">
+                      <span className="w-6 h-6 rounded-md bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] font-bold text-xs flex items-center justify-center shrink-0 border border-pink-200/60 dark:border-pink-900/50">
                         {index + 1}
                       </span>
-                      <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                         {new Date(item.meeting_date).toLocaleDateString('id-ID', {
                           weekday: 'long',
                           day: 'numeric',
@@ -208,7 +208,7 @@ export default async function StudentJournalPage() {
                   </div>
 
                   {/* MATERI KONSULTASI */}
-                  <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs">
+                  <div className="bg-white/80 dark:bg-[#1E1B24] p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] text-xs">
                     <p className="text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed">
                       {item.discussion_summary}
                     </p>

@@ -23,14 +23,14 @@ export default function DefenseScheduleSection({
   const [selectedThesis, setSelectedThesis] = useState<(Thesis & { leader?: Profile; member?: Profile }) | null>(null)
 
   return (
-    <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xs dark:shadow-none overflow-hidden seamless-card space-y-3">
-      <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+    <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl shadow-xs dark:shadow-none overflow-hidden seamless-card space-y-3">
+      <div className="p-5 border-b border-pink-200/60 dark:border-[#2E2838] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
             <Calendar className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Penjadwalan Sidang Tugas Akhir
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -38,16 +38,16 @@ export default function DefenseScheduleSection({
             </p>
           </div>
         </div>
-        <span className="text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 px-3 py-1 rounded-xl border border-blue-200/60 dark:border-blue-800/50 self-start sm:self-auto">
+        <span className="text-xs font-semibold text-[#E11D48] dark:text-[#FF80AB] bg-pink-100 dark:bg-[#2D2235] px-3 py-1 rounded-xl border border-pink-200 dark:border-pink-900/50 self-start sm:self-auto">
           Fitur Sidang: Aktif
         </span>
       </div>
 
-      <div className="divide-y divide-slate-100 dark:divide-slate-800/60">
+      <div className="divide-y divide-pink-100 dark:divide-[#2E2838]">
         {theses.map((t) => (
-          <div key={t.id} className="p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+          <div key={t.id} className="p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:bg-white/50 dark:hover:bg-[#15131C]/50 transition-colors">
             <div className="space-y-1.5 flex-1 min-w-0 max-w-xl">
-              <span className="font-bold text-slate-900 dark:text-slate-100 text-sm break-words">
+              <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm break-words">
                 {t.title}
               </span>
 
@@ -66,7 +66,7 @@ export default function DefenseScheduleSection({
 
               {/* STATUS JADWAL */}
               {t.defense_date ? (
-                <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-blue-700 dark:text-blue-300">
+                <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-[#E11D48] dark:text-[#FF80AB]">
                   <span className="inline-flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" />
                     <span>
@@ -103,7 +103,7 @@ export default function DefenseScheduleSection({
               <button
                 type="button"
                 onClick={() => setSelectedThesis(t)}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs transition-colors seamless-btn"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white dark:bg-[#15131C] border border-pink-200 dark:border-[#2E2838] hover:border-[#E11D48] dark:hover:border-[#FF80AB] text-slate-700 dark:text-slate-200 hover:text-[#E11D48] dark:hover:text-[#FF80AB] font-semibold text-xs transition-colors seamless-btn"
               >
                 <Edit3 className="w-3.5 h-3.5" />
                 <span>{t.defense_date ? 'Ubah Jadwal Sidang' : 'Atur Jadwal Sidang'}</span>

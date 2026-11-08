@@ -47,14 +47,14 @@ export default function ScheduleModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-fade-in">
-      <div className="bg-white dark:bg-[#111927] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 max-w-lg w-full shadow-2xl space-y-4 animate-scale-up">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+      <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 max-w-lg w-full shadow-2xl space-y-4 animate-scale-up">
+        <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
               <Calendar className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+              <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                 Atur Jadwal Sidang Tugas Akhir
               </h3>
               <p className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -87,7 +87,7 @@ export default function ScheduleModal({
               name="defense_date"
               required
               defaultValue={defaultDate}
-              className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20"
+              className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function ScheduleModal({
               required
               placeholder="Contoh: Ruang Sidang Lt. 2, Lab Komputer, atau Ruang Multimedia"
               defaultValue={thesis.defense_location || ''}
-              className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20"
+              className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20"
             />
           </div>
 
@@ -113,7 +113,7 @@ export default function ScheduleModal({
               <select
                 name="examiner1_id"
                 defaultValue={thesis.examiner1_id || ''}
-                className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20"
+                className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20"
               >
                 <option value="">-- Pilih Penguji 1 --</option>
                 {mentors.map((m) => (
@@ -131,7 +131,7 @@ export default function ScheduleModal({
               <select
                 name="examiner2_id"
                 defaultValue={thesis.examiner2_id || ''}
-                className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20"
+                className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20"
               >
                 <option value="">-- Pilih Penguji 2 --</option>
                 {mentors.map((m) => (
@@ -143,7 +143,7 @@ export default function ScheduleModal({
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-end gap-2 pt-2 border-t border-pink-200/60 dark:border-[#2E2838]">
             <button
               type="button"
               onClick={onClose}
@@ -154,7 +154,7 @@ export default function ScheduleModal({
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
             >
               {loading ? 'Menyimpan...' : 'Simpan Jadwal Sidang'}
             </button>

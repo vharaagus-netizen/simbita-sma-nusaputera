@@ -42,16 +42,16 @@ export default function AdminCreateForm() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 text-white font-semibold text-xs shadow-xs transition-colors seamless-btn"
+          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs shadow-xs transition-colors seamless-btn"
         >
           <UserPlus className="w-4 h-4" />
           <span>Tambah Akun Guru / Siswa Baru</span>
         </button>
       ) : (
-        <div className="bg-white dark:bg-[#111927] border border-purple-200 dark:border-purple-900/60 rounded-2xl p-5 shadow-xs dark:shadow-none space-y-4 animate-scale-up">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-            <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm flex items-center gap-2">
-              <UserPlus className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none space-y-4 animate-scale-up">
+          <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
+            <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm flex items-center gap-2">
+              <UserPlus className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
               <span>Formulir Pembuatan Akun oleh Admin</span>
             </h3>
             <button
@@ -85,9 +85,9 @@ export default function AdminCreateForm() {
                   name="admin_role_select"
                   checked={role === 'mentor'}
                   onChange={() => setRole('mentor')}
-                  className="text-purple-600 focus:ring-purple-500"
+                  className="text-[#E11D48] focus:ring-[#E11D48]"
                 />
-                <span className="text-purple-700 dark:text-purple-300">Guru Pembimbing</span>
+                <span className="text-[#E11D48] dark:text-[#FF80AB]">Guru Pembimbing</span>
               </label>
 
               <label className="inline-flex items-center gap-1.5 cursor-pointer">
@@ -96,9 +96,9 @@ export default function AdminCreateForm() {
                   name="admin_role_select"
                   checked={role === 'student'}
                   onChange={() => setRole('student')}
-                  className="text-blue-600 focus:ring-blue-500"
+                  className="text-[#E11D48] focus:ring-[#E11D48]"
                 />
-                <span className="text-blue-700 dark:text-blue-300">Siswa</span>
+                <span className="text-[#E11D48] dark:text-[#FF80AB]">Siswa</span>
               </label>
             </div>
 
@@ -112,7 +112,7 @@ export default function AdminCreateForm() {
                   name="username"
                   required
                   placeholder="Contoh: pak_budi atau rina_xii"
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-purple-600 dark:focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600/20 dark:focus:ring-purple-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
 
@@ -125,7 +125,7 @@ export default function AdminCreateForm() {
                   name="password"
                   required
                   defaultValue="123456"
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-purple-600 dark:focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600/20 dark:focus:ring-purple-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
 
@@ -138,7 +138,7 @@ export default function AdminCreateForm() {
                   name="name"
                   required
                   placeholder="Contoh: Budi Santoso, S.Pd"
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-purple-600 dark:focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600/20 dark:focus:ring-purple-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
 
@@ -150,12 +150,12 @@ export default function AdminCreateForm() {
                   type="text"
                   name="class_or_dept"
                   placeholder={role === 'mentor' ? 'Contoh: IPA / Matematika' : 'Contoh: XII MIPA 1'}
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-purple-600 dark:focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600/20 dark:focus:ring-purple-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+            <div className="flex justify-end gap-2 pt-2 border-t border-pink-200/60 dark:border-[#2E2838]">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
@@ -166,7 +166,7 @@ export default function AdminCreateForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 text-white font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
+                className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
               >
                 {loading ? 'Menyimpan Akun...' : 'Simpan Akun Baru'}
               </button>

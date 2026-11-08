@@ -73,14 +73,14 @@ export default function DefenseScoringCard({
   }
 
   return (
-    <div className="bg-white dark:bg-[#111927] border border-purple-200/80 dark:border-purple-900/60 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+    <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
             <Award className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+            <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
               Rubrik & Form Penilaian Sidang KTI ({roleLabel})
             </h3>
             <p className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -107,7 +107,7 @@ export default function DefenseScoringCard({
       <form onSubmit={handleSubmit} className="space-y-4 text-xs">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* SKOR 1 */}
-          <div className="p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-1.5">
+          <div className="p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] bg-white/80 dark:bg-[#15131C] space-y-1.5">
             <label className="block font-semibold text-slate-700 dark:text-slate-300">
               1. Presentasi & Sikap (30%)
             </label>
@@ -118,12 +118,12 @@ export default function DefenseScoringCard({
               max="100"
               value={scorePresentation}
               onChange={(e) => setScorePresentation(parseFloat(e.target.value) || 0)}
-              className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-purple-600 focus:outline-none"
+              className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#1E1B24] px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none"
             />
           </div>
 
           {/* SKOR 2 */}
-          <div className="p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-1.5">
+          <div className="p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] bg-white/80 dark:bg-[#15131C] space-y-1.5">
             <label className="block font-semibold text-slate-700 dark:text-slate-300">
               2. Kualitas Naskah (35%)
             </label>
@@ -134,12 +134,12 @@ export default function DefenseScoringCard({
               max="100"
               value={scoreContent}
               onChange={(e) => setScoreContent(parseFloat(e.target.value) || 0)}
-              className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-purple-600 focus:outline-none"
+              className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#1E1B24] px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none"
             />
           </div>
 
           {/* SKOR 3 */}
-          <div className="p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40 space-y-1.5">
+          <div className="p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] bg-white/80 dark:bg-[#15131C] space-y-1.5">
             <label className="block font-semibold text-slate-700 dark:text-slate-300">
               3. Penguasaan Materi (35%)
             </label>
@@ -150,19 +150,19 @@ export default function DefenseScoringCard({
               max="100"
               value={scoreMastery}
               onChange={(e) => setScoreMastery(parseFloat(e.target.value) || 0)}
-              className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-purple-600 focus:outline-none"
+              className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#1E1B24] px-3 py-1.5 text-base font-bold text-slate-900 dark:text-slate-100 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none"
             />
           </div>
         </div>
 
         {/* REKAP NILAI OTOMATIS */}
-        <div className="p-4 rounded-xl bg-purple-50/50 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-900/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="p-4 rounded-xl bg-pink-100/60 dark:bg-[#2D2235] border border-pink-200 dark:border-pink-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <span className="text-xs text-purple-700 dark:text-purple-300 font-medium">
+            <span className="text-xs text-[#E11D48] dark:text-[#FF80AB] font-medium">
               Nilai Akhir Berbobot:
             </span>
             <div className="flex items-baseline gap-2 mt-0.5">
-              <span className="text-3xl font-extrabold text-purple-900 dark:text-purple-100">
+              <span className="text-3xl font-extrabold text-[#E11D48] dark:text-[#FF80AB]">
                 {calculatedFinal}
               </span>
               <span className="text-xs text-slate-500">/ 100</span>
@@ -187,7 +187,7 @@ export default function DefenseScoringCard({
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Tuliskan catatan apresiasi atau revisi kecil pasca-sidang..."
-            className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-purple-600 focus:outline-none"
+            className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none"
           />
         </div>
 
@@ -195,7 +195,7 @@ export default function DefenseScoringCard({
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 text-white font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs shadow-xs disabled:opacity-60 seamless-btn transition-colors"
           >
             <Save className="w-4 h-4" />
             <span>{loading ? 'Menyimpan Nilai...' : 'Simpan Nilai Sidang'}</span>

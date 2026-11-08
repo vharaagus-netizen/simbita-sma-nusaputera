@@ -30,12 +30,12 @@ export default function ProposeThesisPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-10 px-4 sm:px-6 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] py-10 px-4 sm:px-6 transition-colors duration-200">
       <div className="max-w-2xl mx-auto w-full animate-fade-in">
         <div className="flex items-center justify-between mb-6">
           <Link
             href="/dashboard/student"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Dashboard Siswa</span>
@@ -43,13 +43,13 @@ export default function ProposeThesisPage() {
           <ThemeToggle />
         </div>
 
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none seamless-card">
-          <div className="flex items-center gap-3 pb-5 border-b border-slate-100 dark:border-slate-800">
-            <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-200/60 dark:border-blue-800/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold shadow-2xs">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none seamless-card">
+          <div className="flex items-center gap-3 pb-5 border-b border-pink-200/60 dark:border-[#2E2838]">
+            <div className="w-11 h-11 rounded-xl bg-pink-100 dark:bg-[#2D2235] border border-pink-200 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold shadow-2xs">
               <FileCheck2 className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+              <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 Pengajuan Judul Tugas Akhir
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -80,7 +80,7 @@ export default function ProposeThesisPage() {
                   type="text"
                   required
                   placeholder="Contoh: Analisis Efektivitas Penggunaan Bioplastik Berbahan Dasar Pati Singkong..."
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function ProposeThesisPage() {
                   name="description"
                   rows={4}
                   placeholder="Jelaskan secara ringkas fenomena atau masalah yang ingin diteliti..."
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors"
                 />
               </div>
             </div>
@@ -116,14 +116,14 @@ export default function ProposeThesisPage() {
               </p>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 dark:text-slate-500">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <ShieldCheck className="w-4 h-4 text-[#E11D48] dark:text-[#F472B6]" />
                 </div>
                 <input
                   id="partner_identifier"
                   name="partner_identifier"
                   type="text"
                   placeholder="Contoh: SIS-4921"
-                  className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 pl-9 pr-3.5 py-2 text-sm uppercase text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 font-mono transition-colors"
+                  className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] pl-9 pr-3.5 py-2 text-sm uppercase text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 font-mono transition-colors"
                 />
               </div>
               <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
@@ -131,7 +131,7 @@ export default function ProposeThesisPage() {
               </p>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-3">
+            <div className="pt-4 border-t border-pink-200/60 dark:border-[#2E2838] flex items-center justify-end gap-3">
               <Link
                 href="/dashboard/student"
                 className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
@@ -141,7 +141,7 @@ export default function ProposeThesisPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold text-xs transition-colors shadow-xs disabled:opacity-60 seamless-btn"
+                className="px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs transition-colors shadow-xs disabled:opacity-60 seamless-btn"
               >
                 {loading ? 'Mengirim Pengajuan...' : 'Ajukan Judul Sekarang'}
               </button>

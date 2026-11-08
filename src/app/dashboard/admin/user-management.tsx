@@ -189,15 +189,15 @@ export default function UserManagement({ initialUsers }: UserManagementProps) {
   }
 
   return (
-    <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
+    <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
       {/* HEADER MANAJEMEN PENGGUNA */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+          <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
             <Users className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-base">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base">
               Manajemen Pengguna (Siswa & Guru)
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">

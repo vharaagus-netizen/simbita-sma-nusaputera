@@ -58,9 +58,9 @@ export default async function RepositoryPage({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] transition-colors duration-200">
       {/* HEADER NAVBAR */}
-      <header className="bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-20 transition-colors duration-200">
+      <header className="bg-[#FFF0F6]/90 dark:bg-[#1E1B24]/90 backdrop-blur-md border-b border-pink-200/80 dark:border-[#2E2838] sticky top-0 z-20 transition-colors duration-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/" className="flex items-center gap-2.5">
@@ -71,7 +71,7 @@ export default async function RepositoryPage({
                 className="w-9 h-9 object-contain shrink-0 drop-shadow-2xs"
               />
               <div>
-                <span className="font-bold text-base text-slate-900 dark:text-slate-100 tracking-tight">
+                <span className="font-bold text-base text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
                   REPOSITORI KTI NUSAPUTERA
                 </span>
                 <p className="text-[10px] text-slate-500 dark:text-slate-400 hidden sm:block -mt-1">
@@ -85,7 +85,7 @@ export default async function RepositoryPage({
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-4 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-xl seamless-btn shadow-xs transition-colors"
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] dark:text-[#0F0F12] rounded-xl seamless-btn shadow-xs transition-colors"
             >
               Masuk Portal
             </Link>
@@ -97,20 +97,20 @@ export default async function RepositoryPage({
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6 animate-fade-in">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Kembali ke Beranda Utama</span>
         </Link>
 
         {/* HERO BANNER & PENCARIAN */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none space-y-4 seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none space-y-4 seamless-card">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/50 mb-3">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-pink-100/70 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50 mb-3">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Perpustakaan Digital KTI</span>
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
               Koleksi Karya Tulis Ilmiah Siswa
             </h1>
             <p className="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -129,11 +129,11 @@ export default async function RepositoryPage({
                 name="q"
                 defaultValue={q || ''}
                 placeholder="Cari berdasarkan judul penelitian, topik, nama siswa, atau pembimbing..."
-                className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 pl-10 pr-24 py-2.5 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:bg-white dark:focus:bg-slate-900 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20"
+                className="block w-full rounded-xl border border-pink-200/80 dark:border-[#2E2838] bg-white dark:bg-[#0F0F12] pl-10 pr-24 py-2.5 text-xs text-[#0F172A] dark:text-[#F8FAFC] placeholder:text-slate-400 focus:bg-white dark:focus:bg-[#0F0F12] focus:border-[#E11D48] dark:focus:border-[#FF80AB] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 transition-colors"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs seamless-btn"
+                className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 rounded-lg bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs seamless-btn cursor-pointer transition-colors"
               >
                 Cari
               </button>
@@ -149,14 +149,14 @@ export default async function RepositoryPage({
               {query && ` untuk kata kunci "${query}"`}
             </span>
             {query && (
-              <Link href="/repository" className="text-blue-600 dark:text-blue-400 hover:underline">
+              <Link href="/repository" className="text-[#E11D48] dark:text-[#FF80AB] hover:underline font-semibold">
                 Hapus Filter
               </Link>
             )}
           </div>
 
           {theses.length === 0 ? (
-            <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-12 text-center shadow-xs dark:shadow-none space-y-3">
+            <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-12 text-center shadow-xs dark:shadow-none space-y-3">
               <BookOpen className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto" />
               <h3 className="font-bold text-slate-700 dark:text-slate-200 text-sm">
                 Tidak Ditemukan Karya Ilmiah
@@ -178,14 +178,14 @@ export default async function RepositoryPage({
                 return (
                   <div
                     key={item.id}
-                    className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none hover:border-blue-300 dark:hover:border-blue-500 seamless-card space-y-4"
+                    className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none hover:border-[#E11D48]/50 dark:hover:border-[#FF80AB]/50 seamless-card space-y-4"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
                         <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/50 uppercase">
                           Lulus Sidang KTI
                         </span>
-                        <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-2 break-words">
+                        <h2 className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-2 break-words">
                           {item.title}
                         </h2>
                         {item.description && (
@@ -208,7 +208,7 @@ export default async function RepositoryPage({
                       )}
                     </div>
 
-                    <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="pt-3 border-t border-pink-200/60 dark:border-[#2E2838] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
                       <div className="flex flex-wrap items-center gap-4">
                         <div>
                           <span>Penulis: </span>
@@ -254,7 +254,7 @@ export default async function RepositoryPage({
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#0f172a] py-6 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 transition-colors duration-200">
+      <footer className="border-t border-pink-200/80 dark:border-[#2E2838] bg-white dark:bg-[#0F0F12] py-6 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 transition-colors duration-200">
         <p className="font-bold text-slate-700 dark:text-slate-200">SMA NUSAPUTERA SEMARANG</p>
         <p>Jl. Ki Mangunsarkoro No.59, Semarang Tengah • Telp: (024) 3542444</p>
         <p className="text-[11px] text-slate-400 dark:text-slate-500 pt-1">

@@ -29,9 +29,9 @@ export default async function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] transition-colors duration-200">
       {/* NAVBAR */}
-      <header className="bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-20 transition-colors duration-200">
+      <header className="bg-[#FFF0F6]/90 dark:bg-[#1E1B24]/90 backdrop-blur-md border-b border-pink-200/80 dark:border-[#2E2838] sticky top-0 z-20 transition-colors duration-200">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -41,7 +41,7 @@ export default async function Home() {
               className="w-10 h-10 object-contain shrink-0 drop-shadow-2xs"
             />
             <div>
-              <span className="font-bold text-lg text-slate-900 dark:text-slate-100 tracking-tight">
+              <span className="font-bold text-lg text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
                 SIMBITA SMA NUSAPUTERA
               </span>
               <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block -mt-1">
@@ -53,15 +53,15 @@ export default async function Home() {
           <div className="flex items-center gap-2">
             <Link
               href="/repository"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-xl"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors rounded-xl"
             >
-              <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <BookOpen className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
               <span>Koleksi KTI</span>
             </Link>
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-xl seamless-btn shadow-xs"
+              className="px-4 py-2 text-sm font-semibold text-white bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] dark:text-[#0F0F12] rounded-xl seamless-btn shadow-xs transition-colors"
             >
               Masuk Portal
             </Link>
@@ -72,9 +72,9 @@ export default async function Home() {
       {/* KONTEN UTAMA: PORTAL AKADEMIK */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-10 space-y-8 animate-fade-in">
         {/* KARTU SELAMAT DATANG */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none seamless-card">
           <div className="max-w-2xl">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
               Portal Bimbingan Tugas Akhir Siswa
             </h1>
             <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -86,21 +86,21 @@ export default async function Home() {
           <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href="/login"
-              className="px-5 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-xl flex items-center justify-center gap-2 seamless-btn shadow-xs"
+              className="px-5 py-2.5 text-sm font-semibold text-white bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] dark:text-[#0F0F12] rounded-xl flex items-center justify-center gap-2 seamless-btn shadow-xs transition-colors"
             >
               <LogIn className="w-4 h-4" />
               <span>Masuk ke Akun</span>
             </Link>
             <Link
               href="/repository"
-              className="px-5 py-2.5 text-sm font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-200/80 dark:border-blue-900/60 rounded-xl flex items-center justify-center gap-2 seamless-btn"
+              className="px-5 py-2.5 text-sm font-semibold text-[#E11D48] dark:text-[#FF80AB] bg-white dark:bg-[#2D2235] hover:bg-pink-100/50 dark:hover:bg-[#382B42] border border-pink-200/80 dark:border-pink-900/50 rounded-xl flex items-center justify-center gap-2 seamless-btn transition-colors"
             >
-              <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <BookOpen className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
               <span>Perpustakaan KTI</span>
             </Link>
           </div>
 
-          <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          <div className="mt-6 pt-5 border-t border-pink-200/60 dark:border-[#2E2838] flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
             <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>
               Privasi terlindungi: Sistem menggunakan <strong>Kode Identitas Acak (SIS-XXXX / GUR-XXXX)</strong>.
@@ -109,15 +109,15 @@ export default async function Home() {
         </div>
 
         {/* JADWAL & TENGGAT WAKTU TUGAS AKHIR */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
-          <div className="flex items-center gap-2 pb-4 border-b border-slate-100 dark:border-slate-800 mb-4">
-            <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-base">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none seamless-card">
+          <div className="flex items-center gap-2 pb-4 border-b border-pink-200/60 dark:border-[#2E2838] mb-4">
+            <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base">
               Jadwal & Batas Waktu Bimbingan Sekolah
             </h2>
           </div>
 
-          <div className="divide-y divide-slate-100 dark:divide-slate-800/60">
+          <div className="divide-y divide-pink-200/60 dark:divide-[#2E2838]">
             {milestones.length > 0 ? (
               milestones.map((item, index) => (
                 <div
@@ -125,7 +125,7 @@ export default async function Home() {
                   className="py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                 >
                   <div className="flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="w-6 h-6 rounded-md bg-white dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200 dark:border-pink-900/40 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                       {index + 1}
                     </span>
                     <div>
@@ -139,7 +139,7 @@ export default async function Home() {
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700/80 shrink-0 self-start sm:self-auto ml-9 sm:ml-0">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-white/80 dark:bg-[#0F0F12]/80 px-2.5 py-1 rounded-lg border border-pink-200/80 dark:border-[#2E2838] shrink-0 self-start sm:self-auto ml-9 sm:ml-0">
                     <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                     <span>
                       {new Date(item.deadline_date).toLocaleDateString("id-ID", {
@@ -161,7 +161,7 @@ export default async function Home() {
       </main>
 
       {/* FOOTER RESMI SEKOLAH */}
-      <footer className="border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-[#0f172a] py-6 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 transition-colors duration-200">
+      <footer className="border-t border-pink-200/80 dark:border-[#2E2838] bg-white dark:bg-[#0F0F12] py-6 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1 transition-colors duration-200">
         <p className="font-bold text-slate-700 dark:text-slate-200">SMA NUSAPUTERA SEMARANG</p>
         <p>Jl. Ki Mangunsarkoro No.59, Semarang Tengah • Telp: (024) 3542444</p>
         <p>Email: sma_nusaputera@yahoo.id / info@smanusaputera.sch.id</p>

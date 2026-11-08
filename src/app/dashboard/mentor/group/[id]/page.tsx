@@ -121,12 +121,12 @@ export default async function MentorGroupDetailPage({
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] py-8 px-4 sm:px-6 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] py-8 px-4 sm:px-6 transition-colors duration-200">
       <div className="max-w-4xl mx-auto w-full space-y-6 animate-fade-in">
         <div className="flex items-center justify-between">
           <Link
             href="/dashboard/mentor"
-            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 hover:text-[#E11D48] dark:hover:text-[#FF80AB] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Kembali ke Daftar Kelompok</span>
@@ -135,13 +135,13 @@ export default async function MentorGroupDetailPage({
         </div>
 
         {/* HEADER KELOMPOK SISWA */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 overflow-hidden seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 overflow-hidden seamless-card">
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
             <div className="flex-1 min-w-0">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#E11D48] dark:text-[#FF80AB]">
                 Lembar Bimbingan Tugas Akhir Kelompok
               </span>
-              <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-1 break-words break-all [overflow-wrap:anywhere]">
+              <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-1 break-words break-all [overflow-wrap:anywhere]">
                 {thesis.title}
               </h1>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 break-words break-all [overflow-wrap:anywhere]">
@@ -155,18 +155,18 @@ export default async function MentorGroupDetailPage({
                 <span>Siap Sidang (ACC Final)</span>
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50 shrink-0 self-start sm:self-auto">
-                <Clock className="w-3.5 h-3.5 text-blue-500" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50 shrink-0 self-start sm:self-auto">
+                <Clock className="w-3.5 h-3.5 text-[#E11D48] dark:text-[#FF80AB]" />
                 <span>Sedang Bimbingan</span>
               </span>
             )}
           </div>
 
-          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-6 text-xs text-slate-600 dark:text-slate-300">
+          <div className="pt-3 border-t border-pink-200/60 dark:border-[#2E2838] flex flex-wrap items-center gap-6 text-xs text-slate-600 dark:text-slate-300">
             <div>
               <span className="text-slate-400 dark:text-slate-500">Siswa 1 (Ketua): </span>
               <strong className="text-slate-800 dark:text-slate-100">{thesis.leader?.name}</strong>{' '}
-              <span className="text-blue-600 dark:text-blue-400 font-semibold font-mono">
+              <span className="text-[#E11D48] dark:text-[#FF80AB] font-semibold font-mono">
                 ({thesis.leader?.identifier})
               </span>
             </div>
@@ -174,7 +174,7 @@ export default async function MentorGroupDetailPage({
               <span className="text-slate-400 dark:text-slate-500">Siswa 2 (Anggota): </span>
               <strong className="text-slate-800 dark:text-slate-100">{thesis.member?.name || 'Belum ditambahkan'}</strong>{' '}
               {thesis.member && (
-                <span className="text-blue-600 dark:text-blue-400 font-semibold font-mono">
+                <span className="text-[#E11D48] dark:text-[#FF80AB] font-semibold font-mono">
                   ({thesis.member?.identifier})
                 </span>
               )}
@@ -195,21 +195,21 @@ export default async function MentorGroupDetailPage({
 
         {/* JADWAL SIDANG KTI (KONDISIONAL: FITUR 1 ON) */}
         {featureSettings.defense_scheduling && (thesis.defense_date || thesis.defense_location) && (
-          <div className="bg-white dark:bg-[#111927] border border-blue-200/80 dark:border-blue-900/60 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+            <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+                <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                   Jadwal & Penguji Sidang Ujian KTI
                 </h2>
               </div>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-900/50">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50">
                 Terjadwal
               </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div className="p-3 rounded-xl bg-white/80 dark:bg-[#15131C] border border-pink-200/60 dark:border-[#2E2838]">
                 <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
                   Waktu & Tanggal
                 </span>
@@ -227,7 +227,7 @@ export default async function MentorGroupDetailPage({
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div className="p-3 rounded-xl bg-white/80 dark:bg-[#15131C] border border-pink-200/60 dark:border-[#2E2838]">
                 <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
                   Ruangan / Lokasi
                 </span>
@@ -237,7 +237,7 @@ export default async function MentorGroupDetailPage({
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-800">
+              <div className="p-3 rounded-xl bg-white/80 dark:bg-[#15131C] border border-pink-200/60 dark:border-[#2E2838]">
                 <span className="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-bold tracking-wider">
                   Dewan Penguji
                 </span>
@@ -264,17 +264,17 @@ export default async function MentorGroupDetailPage({
 
             {/* REKAPITULASI NILAI DARI SEMUA PENGUJI / PEMBIMBING */}
             {allDefenseScores.length > 0 && (
-              <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+                <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
                   <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                    <Award className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+                    <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                       Rekap Nilai Sidang Masuk ({allDefenseScores.length})
                     </h3>
                   </div>
                 </div>
 
-                <div className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+                <div className="divide-y divide-pink-100 dark:divide-[#2E2838] text-xs">
                   {allDefenseScores.map((sc) => (
                     <div key={sc.id} className="py-2.5 flex items-center justify-between gap-3">
                       <div>
@@ -291,7 +291,7 @@ export default async function MentorGroupDetailPage({
                         )}
                       </div>
                       <div className="text-right">
-                        <span className="font-extrabold text-purple-600 dark:text-purple-400 text-sm">
+                        <span className="font-extrabold text-[#E11D48] dark:text-[#FF80AB] text-sm">
                           {sc.final_score}
                         </span>
                         <span className="text-[10px] text-slate-400 dark:text-slate-500 ml-1">/ 100</span>
@@ -305,11 +305,11 @@ export default async function MentorGroupDetailPage({
         )}
 
         {/* BAGIAN 1: REVISI BERKAS NASKAH BAB */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
+          <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
             <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-              <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+              <FileText className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+              <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                 Naskah Draft Bab yang Perlu Diperiksa ({sessions.length})
               </h2>
             </div>
@@ -324,18 +324,18 @@ export default async function MentorGroupDetailPage({
               {sessions.map((item) => (
                 <div
                   key={item.id}
-                  className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 bg-slate-50/60 dark:bg-slate-800/40 space-y-3 seamless-card"
+                  className="border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 bg-white/70 dark:bg-[#15131C] space-y-3 seamless-card"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                      <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                         {item.chapter}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${
                           item.file_type === 'pdf'
                             ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200/60 dark:border-rose-900/50'
-                            : 'bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-900/50'
+                            : 'bg-pink-100 dark:bg-pink-950/60 text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/60 dark:border-pink-900/50'
                         }`}
                       >
                         {item.file_type}
@@ -375,7 +375,7 @@ export default async function MentorGroupDetailPage({
                       href={item.file_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/50 text-indigo-700 dark:text-indigo-300 font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/50 seamless-btn transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-pink-100 dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB] font-semibold hover:bg-pink-200 dark:hover:bg-pink-900/60 seamless-btn transition-colors"
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Unduh Berkas ({item.file_type.toUpperCase()})</span>
@@ -383,7 +383,7 @@ export default async function MentorGroupDetailPage({
                   </div>
 
                   {item.student_notes && (
-                    <div className="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300">
+                    <div className="bg-white/80 dark:bg-[#1E1B24] p-3 rounded-xl border border-pink-200/60 dark:border-[#2E2838] text-xs text-slate-600 dark:text-slate-300">
                       <strong className="text-slate-800 dark:text-slate-100">Catatan Siswa: </strong>
                       {item.student_notes}
                     </div>
@@ -403,11 +403,11 @@ export default async function MentorGroupDetailPage({
         </div>
 
         {/* BAGIAN 2: JURNAL TATAP MUKA (LOGBOOK KONSULTASI) */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-4 seamless-card">
+          <div className="flex items-center justify-between pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <h2 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+              <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+              <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                 Jurnal Konsultasi Tatap Muka ({journals.length})
               </h2>
             </div>
@@ -425,11 +425,11 @@ export default async function MentorGroupDetailPage({
               {journals.map((j) => (
                 <div
                   key={j.id}
-                  className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 bg-slate-50/60 dark:bg-slate-800/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 seamless-card"
+                  className="border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 bg-white/70 dark:bg-[#15131C] flex flex-col sm:flex-row sm:items-center justify-between gap-3 seamless-card"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 text-xs">
-                      <span className="font-bold text-slate-900 dark:text-slate-100">
+                      <span className="font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                         {new Date(j.meeting_date).toLocaleDateString('id-ID', {
                           weekday: 'long',
                           day: 'numeric',

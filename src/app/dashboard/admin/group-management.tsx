@@ -244,15 +244,15 @@ export default function GroupManagement({
   }
 
   return (
-    <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
+    <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 shadow-xs dark:shadow-none space-y-5 seamless-card">
       {/* HEADER SECTION */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-lg bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center font-bold">
               <Users className="w-4 h-4" />
             </div>
-            <h2 className="font-bold text-slate-900 dark:text-slate-100 text-base">
+            <h2 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base">
               Pengatur Kelompok KTI & Plotting Pembimbing
             </h2>
           </div>
@@ -267,7 +267,7 @@ export default function GroupManagement({
             setIsCreateOpen(true)
             setFeedback(null)
           }}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold text-xs transition-colors shadow-xs seamless-btn cursor-pointer shrink-0 self-start sm:self-auto"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs transition-colors shadow-xs seamless-btn cursor-pointer shrink-0 self-start sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
           <span>Buat Kelompok Baru</span>

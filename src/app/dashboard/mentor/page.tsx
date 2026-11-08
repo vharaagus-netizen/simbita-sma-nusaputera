@@ -87,9 +87,9 @@ export default async function MentorDashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] transition-colors duration-200">
       {/* HEADER DASHBOARD GURU */}
-      <header className="bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-20 transition-colors duration-200">
+      <header className="bg-white/90 dark:bg-[#0F0F12]/90 backdrop-blur-md border-b border-pink-200/80 dark:border-[#2E2838] sticky top-0 z-20 transition-colors duration-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -99,10 +99,10 @@ export default async function MentorDashboard() {
               className="w-9 h-9 object-contain shrink-0 drop-shadow-2xs"
             />
             <div>
-              <span className="font-bold text-base text-slate-900 dark:text-slate-100 tracking-tight">
+              <span className="font-bold text-base text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
                 SIMBITA NUSAPUTERA
               </span>
-              <span className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/50">
+              <span className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/60 dark:border-pink-900/50">
                 Guru Pembimbing
               </span>
             </div>
@@ -111,15 +111,15 @@ export default async function MentorDashboard() {
           <div className="flex items-center gap-3">
             <Link
               href="/repository"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-pink-200 dark:border-[#2E2838] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#E11D48] dark:hover:text-[#FF80AB] hover:bg-pink-50 dark:hover:bg-[#1E1B24] transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <Sparkles className="w-3.5 h-3.5 text-[#E11D48] dark:text-[#FF80AB]" />
               <span>Repositori KTI</span>
             </Link>
 
             <ThemeToggle />
 
-            <div className="text-right hidden sm:block border-l border-slate-200 dark:border-slate-800 pl-3">
+            <div className="text-right hidden sm:block border-l border-pink-200 dark:border-[#2E2838] pl-3">
               <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                 {mentorProfile?.name || user.email}
               </p>
@@ -144,24 +144,24 @@ export default async function MentorDashboard() {
       {/* ISI DASHBOARD */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-8 space-y-6 animate-fade-in">
         {/* IDENTITAS GURU */}
-        <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 flex items-center justify-center font-extrabold text-indigo-700 dark:text-indigo-300 text-lg shadow-2xs">
+            <div className="w-12 h-12 rounded-2xl bg-pink-100 dark:bg-[#2D2235] border border-pink-200 dark:border-pink-900/50 flex items-center justify-center font-extrabold text-[#E11D48] dark:text-[#FF80AB] text-lg shadow-2xs">
               {mentorProfile?.name?.charAt(0) || 'G'}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                <h1 className="text-lg font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                   {mentorProfile?.name || 'Guru Pembimbing'}
                 </h1>
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/50 text-indigo-700 dark:text-indigo-300">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-white/80 dark:bg-[#15131C] border border-pink-200 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB]">
                   <ShieldCheck className="w-3.5 h-3.5" />
                   <span>{mentorProfile?.identifier || 'GUR-XXXX'}</span>
                 </span>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Rumpun: {mentorProfile?.class_or_dept || '-'} • Anda membimbing{' '}
-                <strong className="text-slate-700 dark:text-slate-200">{assignedGroups.length} kelompok siswa</strong>.
+                <strong className="text-slate-800 dark:text-slate-200">{assignedGroups.length} kelompok siswa</strong>.
               </p>
             </div>
           </div>
@@ -172,12 +172,12 @@ export default async function MentorDashboard() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+                <Calendar className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+                <h2 className="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                   Jadwal & Tugas Menguji Sidang KTI
                 </h2>
               </div>
-              <span className="text-xs text-purple-600 dark:text-purple-400 font-semibold bg-purple-50 dark:bg-purple-950/40 px-2.5 py-0.5 rounded-full border border-purple-200/60 dark:border-purple-800/50">
+              <span className="text-xs text-[#E11D48] dark:text-[#FF80AB] font-semibold bg-pink-100 dark:bg-[#2D2235] px-2.5 py-0.5 rounded-full border border-pink-200/60 dark:border-pink-900/50">
                 {examiningGroups.length} Kelompok Diuji
               </span>
             </div>
@@ -186,15 +186,15 @@ export default async function MentorDashboard() {
               {examiningGroups.map((group) => (
                 <div
                   key={group.id}
-                  className="bg-white dark:bg-[#111927] border border-purple-200/80 dark:border-purple-900/60 rounded-2xl p-5 shadow-xs dark:shadow-none hover:border-purple-400 dark:hover:border-purple-500 seamless-card transition-colors space-y-3"
+                  className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none hover:border-[#E11D48] dark:hover:border-[#FF80AB] seamless-card transition-colors space-y-3"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB]">
                           {group.examiner1_id === user.id ? 'Penguji 1' : 'Penguji 2'}
                         </span>
-                        <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base break-words break-all [overflow-wrap:anywhere]">
+                        <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base break-words break-all [overflow-wrap:anywhere]">
                           {group.title}
                         </h3>
                       </div>
@@ -205,7 +205,7 @@ export default async function MentorDashboard() {
 
                     <Link
                       href={`/dashboard/mentor/group/${group.id}`}
-                      className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 dark:bg-purple-600 dark:hover:bg-purple-500 text-white font-semibold text-xs flex items-center gap-1.5 seamless-btn shadow-xs transition-colors shrink-0 self-start sm:self-auto"
+                      className="px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs flex items-center gap-1.5 seamless-btn shadow-xs transition-colors shrink-0 self-start sm:self-auto"
                     >
                       <Award className="w-3.5 h-3.5" />
                       <span>Form Penilaian & Naskah</span>
@@ -215,7 +215,7 @@ export default async function MentorDashboard() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600 dark:text-slate-300">
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0" />
+                      <Calendar className="w-3.5 h-3.5 text-[#E11D48] dark:text-[#FF80AB] shrink-0" />
                       <span>
                         Waktu:{' '}
                         <strong>
@@ -250,7 +250,7 @@ export default async function MentorDashboard() {
         {/* DAFTAR KELOMPOK SISWA BIMBINGAN */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+            <h2 className="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC]">
               Daftar Kelompok Siswa Bimbingan
             </h2>
             <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -259,7 +259,7 @@ export default async function MentorDashboard() {
           </div>
 
           {assignedGroups.length === 0 ? (
-            <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-8 text-center shadow-xs dark:shadow-none seamless-card">
+            <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-8 text-center shadow-xs dark:shadow-none seamless-card">
               <Users className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
               <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">
                 Belum Ada Kelompok yang Dialokasikan
@@ -273,11 +273,11 @@ export default async function MentorDashboard() {
               {assignedGroups.map((group) => (
                 <div
                   key={group.id}
-                  className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none hover:border-indigo-400 dark:hover:border-indigo-500 seamless-card transition-colors"
+                  className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none hover:border-[#E11D48] dark:hover:border-[#FF80AB] seamless-card transition-colors"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3 border-b border-pink-200/60 dark:border-[#2E2838]">
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-slate-900 dark:text-slate-100 text-base break-words break-all [overflow-wrap:anywhere]">
+                      <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base break-words break-all [overflow-wrap:anywhere]">
                         {group.title}
                       </h3>
                       <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1 break-all [overflow-wrap:anywhere]">
@@ -291,7 +291,7 @@ export default async function MentorDashboard() {
                         <span>Siap Sidang</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/80 dark:border-blue-800/50 shrink-0 self-start sm:self-auto">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50 shrink-0 self-start sm:self-auto">
                         {group.status === 'pending_mentor'
                           ? 'Menunggu Review Judul'
                           : group.status === 'in_progress'
@@ -324,7 +324,7 @@ export default async function MentorDashboard() {
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/dashboard/mentor/group/${group.id}`}
-                        className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 seamless-btn shadow-xs transition-colors"
+                        className="px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs flex items-center gap-1.5 seamless-btn shadow-xs transition-colors"
                       >
                         <span>Buka Lembar Bimbingan</span>
                         <ArrowRight className="w-3.5 h-3.5" />

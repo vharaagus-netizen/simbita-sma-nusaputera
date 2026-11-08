@@ -103,9 +103,9 @@ export default async function AdminDashboardPage() {
   const completedTheses = theses.filter((t) => t.status === 'completed').length
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/70 dark:bg-[#090d16] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] transition-colors duration-200">
       {/* HEADER ADMIN */}
-      <header className="bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 sticky top-0 z-20 transition-colors duration-200">
+      <header className="bg-white/90 dark:bg-[#0F0F12]/90 backdrop-blur-md border-b border-pink-200/80 dark:border-[#2E2838] sticky top-0 z-20 transition-colors duration-200">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -115,10 +115,10 @@ export default async function AdminDashboardPage() {
               className="w-9 h-9 object-contain shrink-0 drop-shadow-2xs"
             />
             <div>
-              <span className="font-bold text-base text-slate-900 dark:text-slate-100 tracking-tight">
+              <span className="font-bold text-base text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
                 SIMBITA NUSAPUTERA
               </span>
-              <span className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200/60 dark:border-purple-800/50">
+              <span className="ml-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-100 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/60 dark:border-pink-900/50">
                 Administrator / Koordinator
               </span>
             </div>
@@ -127,15 +127,15 @@ export default async function AdminDashboardPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/repository"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-pink-200 dark:border-[#2E2838] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#E11D48] dark:hover:text-[#FF80AB] hover:bg-pink-50 dark:hover:bg-[#1E1B24] transition-colors"
             >
-              <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <Sparkles className="w-3.5 h-3.5 text-[#E11D48] dark:text-[#FF80AB]" />
               <span>Repositori KTI</span>
             </Link>
 
             <ThemeToggle />
 
-            <div className="text-right hidden sm:block border-l border-slate-200 dark:border-slate-800 pl-3">
+            <div className="text-right hidden sm:block border-l border-pink-200 dark:border-[#2E2838] pl-3">
               <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                 {profile?.name || 'Administrator'}
               </p>
@@ -160,7 +160,7 @@ export default async function AdminDashboardPage() {
         {/* STATISTIK & TOMBOL AKSI */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+            <h1 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
               Panel Pengaturan Guru & Siswa
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -183,27 +183,27 @@ export default async function AdminDashboardPage() {
 
         {/* RINGKASAN DATA */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
+          <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
             <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Kelompok Siswa</span>
-            <p className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 mt-1">{totalTheses}</p>
+            <p className="text-2xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] mt-1">{totalTheses}</p>
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Total terdaftar</p>
           </div>
 
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
+          <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
             <span className="text-xs font-medium text-amber-600 dark:text-amber-400">Belum Ada Pembimbing</span>
             <p className="text-2xl font-extrabold text-amber-600 dark:text-amber-400 mt-1">{unassignedTheses}</p>
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Menunggu di-plot</p>
           </div>
 
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
-            <span className="text-xs font-medium text-purple-600 dark:text-purple-400">Guru Pembimbing</span>
-            <p className="text-2xl font-extrabold text-purple-700 dark:text-purple-300 mt-1">{mentors.length}</p>
+          <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
+            <span className="text-xs font-medium text-[#E11D48] dark:text-[#FF80AB]">Guru Pembimbing</span>
+            <p className="text-2xl font-extrabold text-[#E11D48] dark:text-[#FF80AB] mt-1">{mentors.length}</p>
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Guru aktif</p>
           </div>
 
-          <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
-            <span className="text-xs font-medium text-blue-600 dark:text-blue-400">Siswa Terdaftar</span>
-            <p className="text-2xl font-extrabold text-blue-700 dark:text-blue-300 mt-1">{students.length}</p>
+          <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-4 shadow-xs dark:shadow-none seamless-card">
+            <span className="text-xs font-medium text-[#E11D48] dark:text-[#FF80AB]">Siswa Terdaftar</span>
+            <p className="text-2xl font-extrabold text-[#E11D48] dark:text-[#FF80AB] mt-1">{students.length}</p>
             <p className="text-[10px] text-slate-400 dark:text-slate-500">Peserta bimbingan</p>
           </div>
         </div>

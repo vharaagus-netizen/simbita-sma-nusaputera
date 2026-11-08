@@ -151,7 +151,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
             name="chapter"
             required
             disabled={loading}
-            className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 transition-colors disabled:opacity-60"
+            className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 bg-white dark:bg-[#15131C] focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors disabled:opacity-60"
           >
             {CHAPTER_OPTIONS.map((ch) => (
               <option key={ch} value={ch}>
@@ -176,7 +176,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
             accept=".pdf,.docx,.doc"
             required
             disabled={loading}
-            className="block w-full text-xs text-slate-500 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 dark:file:bg-blue-950/60 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer border border-slate-300 dark:border-slate-700 rounded-xl p-1 bg-white dark:bg-slate-900 transition-colors disabled:opacity-60"
+            className="block w-full text-xs text-slate-500 dark:text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-100 dark:file:bg-pink-950/60 file:text-[#E11D48] dark:file:text-[#FF80AB] hover:file:bg-pink-200 dark:hover:file:bg-pink-900/50 cursor-pointer border border-pink-200 dark:border-[#2E2838] rounded-xl p-1 bg-white dark:bg-[#15131C] transition-colors disabled:opacity-60"
           />
         </div>
       </div>
@@ -195,25 +195,25 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
           rows={2}
           disabled={loading}
           placeholder="Contoh: Sudah memperbaiki latar belakang masalah dan menambahkan 3 jurnal rujukan sesuai saran Bapak..."
-          className="block w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-blue-600 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 transition-colors disabled:opacity-60"
+          className="block w-full rounded-xl border border-pink-200 dark:border-[#2E2838] bg-white dark:bg-[#15131C] px-3 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-[#E11D48] dark:focus:border-[#F472B6] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 dark:focus:ring-[#F472B6]/20 transition-colors disabled:opacity-60"
         />
       </div>
 
       {/* LIVE PROGRESS BAR */}
       {loading && (
-        <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-900/50 space-y-2 animate-fade-in">
+        <div className="p-3 rounded-xl bg-pink-50/80 dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/50 space-y-2 animate-fade-in">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-blue-900 dark:text-blue-200 flex items-center gap-1.5">
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-blue-600 dark:text-blue-400" />
+            <span className="font-medium text-pink-950 dark:text-pink-200 flex items-center gap-1.5">
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#E11D48] dark:text-[#FF80AB]" />
               <span>{statusMessage || 'Sedang memproses naskah...'}</span>
             </span>
-            <span className="font-bold text-blue-600 dark:text-blue-400 font-mono">
+            <span className="font-bold text-[#E11D48] dark:text-[#FF80AB] font-mono">
               {progress}%
             </span>
           </div>
-          <div className="w-full h-2 rounded-full bg-blue-100 dark:bg-slate-800 overflow-hidden">
+          <div className="w-full h-2 rounded-full bg-pink-100 dark:bg-[#15131C] overflow-hidden">
             <div
-              className="h-full bg-linear-to-r from-blue-600 via-indigo-500 to-sky-400 rounded-full transition-all duration-300 ease-out shadow-xs"
+              className="h-full bg-linear-to-r from-[#E11D48] via-pink-500 to-[#F472B6] rounded-full transition-all duration-300 ease-out shadow-xs"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -229,7 +229,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors shrink-0"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] text-xs font-semibold shadow-xs disabled:opacity-60 seamless-btn transition-colors shrink-0"
         >
           {loading ? (
             <>
