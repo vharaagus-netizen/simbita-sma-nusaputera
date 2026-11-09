@@ -92,20 +92,20 @@ export default async function Home() {
             {/* Live Indicator Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/80 dark:bg-[#15131C]/90 border border-pink-200 dark:border-[#2E2838] text-xs font-semibold text-[#E11D48] dark:text-[#FF80AB] shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-[#E11D48] dark:bg-[#FF80AB] animate-pulse" />
-              <span>Tahun Ajaran 2025/2026 • Portal Akademik Terpadu</span>
+              <span>Tahun Ajaran 2025/2026 • SMA Nusaputera Semarang</span>
             </div>
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl font-black text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-[1.15]">
-              Bimbingan Karya Ilmiah{" "}
+              Bimbingan Karya Tulis Ilmiah{" "}
               <span className="bg-linear-to-r from-[#E11D48] via-pink-600 to-[#FF4081] dark:from-[#F472B6] dark:via-[#FF80AB] dark:to-pink-300 bg-clip-text text-transparent">
-                Lebih Rapi, Terstruktur & Terverifikasi
+                SMA Nusaputera Semarang
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              Platform bimbingan resmi SMA Nusaputera Semarang. Unggah naskah bab per bab tanpa kendala kuota, rekam konsultasi tatap muka berparaf digital guru, dan cetak kartu kontrol tugas akhir dalam satu pintu.
+              Sistem pencatatan bimbingan tugas akhir. Unggah draf bab, catat konsultasi tatap muka berparaf guru, dan cetak lembar kontrol resmi sebagai syarat sidang.
             </p>
 
             {/* Call to Actions */}
@@ -136,7 +136,7 @@ export default async function Home() {
               <span className="hidden sm:inline text-pink-300 dark:text-pink-900">•</span>
               <div className="flex items-center gap-1.5 font-medium">
                 <CheckCircle2 className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB] shrink-0" />
-                <span>Bimbingan Fleksibel (Tanpa Kuota Kaku)</span>
+                <span>Sesi Bimbingan Fleksibel Sesuai Kebutuhan</span>
               </div>
               <span className="hidden sm:inline text-pink-300 dark:text-pink-900">•</span>
               <div className="flex items-center gap-1.5 font-medium">
@@ -155,10 +155,10 @@ export default async function Home() {
               <UploadCloud className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base">
-              Unggah Naskah Bab Cepat
+              Unggah Draf Bab (PDF & Word)
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Jalur unggah naskah langsung berkecepatan tinggi dengan indikator progres persentase transparan untuk berkas PDF dan Word hingga 15 MB.
+              Unggah naskah draf bab per bab hingga 15 MB. Periksa catatan koreksi dan revisi langsung dari guru pembimbing.
             </p>
           </div>
 
@@ -171,7 +171,7 @@ export default async function Home() {
               Logbook Konsultasi Tatap Muka
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Catat setiap sesi konsultasi langsung di sekolah lengkap dengan tanggal dan ruang bimbingan, lalu divalidasi dengan paraf digital guru.
+              Catat tanggal, lokasi, dan pokok bahasan bimbingan di sekolah, lalu divalidasi dengan paraf digital guru.
             </p>
           </div>
 
@@ -181,10 +181,10 @@ export default async function Home() {
               <Award className="w-5 h-5" />
             </div>
             <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-base">
-              Rekomendasi Sidang & Rubrik Nilai
+              Rekomendasi Sidang & Lembar Kontrol
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Guru pembimbing dapat memberikan persetujuan ACC Final kapan saja jika naskah dinilai telah layak, dilanjutkan penilaian sidang resmi sekolah.
+              Guru memberikan persetujuan ACC Final saat naskah siap. Siswa dapat mencetak lembar kontrol resmi berformat A4 untuk syarat sidang.
             </p>
           </div>
         </section>

@@ -108,13 +108,13 @@ export default async function RepositoryPage({
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1 rounded-full bg-white/80 dark:bg-[#15131C] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200 dark:border-[#2E2838] mb-3 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Perpustakaan Digital KTI Terakreditasi</span>
+              <span>Repositori KTI SMA Nusaputera</span>
             </span>
             <h1 className="text-2xl sm:text-4xl font-black text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
               Koleksi Karya Tulis Ilmiah Siswa
             </h1>
             <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-              Temukan referensi judul, metodologi penelitian, dan dokumen karya ilmiah tugas akhir yang telah dinyatakan lulus oleh Dewan Penguji SMA Nusaputera Semarang.
+              Koleksi judul penelitian, metodologi, dan dokumen karya tulis ilmiah yang telah lulus sidang dan disetujui Dewan Penguji SMA Nusaputera Semarang.
             </p>
           </div>
 
