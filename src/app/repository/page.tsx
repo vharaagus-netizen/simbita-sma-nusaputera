@@ -104,38 +104,38 @@ export default async function RepositoryPage({
         </Link>
 
         {/* HERO BANNER & PENCARIAN */}
-        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-6 sm:p-8 shadow-xs dark:shadow-none space-y-4 seamless-card">
+        <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-3xl p-6 sm:p-10 shadow-xs dark:shadow-none space-y-5 seamless-card">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-full bg-pink-100/70 dark:bg-[#2D2235] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200/80 dark:border-pink-900/50 mb-3">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1 rounded-full bg-white/80 dark:bg-[#15131C] text-[#E11D48] dark:text-[#FF80AB] border border-pink-200 dark:border-[#2E2838] mb-3 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Perpustakaan Digital KTI</span>
+              <span>Perpustakaan Digital KTI Terakreditasi</span>
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
+            <h1 className="text-2xl sm:text-4xl font-black text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
               Koleksi Karya Tulis Ilmiah Siswa
             </h1>
-            <p className="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Temukan referensi judul, topik penelitian, dan karya ilmiah tugas akhir yang telah dinyatakan lulus oleh Dewan Penguji SMA Nusaputera Semarang.
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              Temukan referensi judul, metodologi penelitian, dan dokumen karya ilmiah tugas akhir yang telah dinyatakan lulus oleh Dewan Penguji SMA Nusaputera Semarang.
             </p>
           </div>
 
-          {/* FORM PENCARIAN */}
-          <form method="GET" className="pt-2">
+          {/* FORM PENCARIAN ELEGAN */}
+          <form method="GET" className="pt-1">
             <div className="relative max-w-xl">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-                <Search className="w-4 h-4" />
+                <Search className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
               </div>
               <input
                 type="text"
                 name="q"
                 defaultValue={q || ''}
                 placeholder="Cari berdasarkan judul penelitian, topik, nama siswa, atau pembimbing..."
-                className="block w-full rounded-xl border border-pink-200/80 dark:border-[#2E2838] bg-white dark:bg-[#0F0F12] pl-10 pr-24 py-2.5 text-xs text-[#0F172A] dark:text-[#F8FAFC] placeholder:text-slate-400 focus:bg-white dark:focus:bg-[#0F0F12] focus:border-[#E11D48] dark:focus:border-[#FF80AB] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 transition-colors"
+                className="block w-full rounded-2xl border border-pink-200/90 dark:border-[#2E2838] bg-white dark:bg-[#0F0F12] pl-10 pr-28 py-3 text-xs sm:text-sm text-[#0F172A] dark:text-[#F8FAFC] placeholder:text-slate-400 focus:bg-white dark:focus:bg-[#0F0F12] focus:border-[#E11D48] dark:focus:border-[#FF80AB] focus:outline-none focus:ring-2 focus:ring-[#E11D48]/20 transition-all shadow-2xs"
               />
               <button
                 type="submit"
-                className="absolute right-1.5 top-1.5 bottom-1.5 px-3.5 rounded-lg bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-semibold text-xs seamless-btn cursor-pointer transition-colors"
+                className="absolute right-2 top-2 bottom-2 px-4 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] font-bold text-xs seamless-btn cursor-pointer transition-colors flex items-center gap-1.5"
               >
-                Cari
+                <span>Cari KTI</span>
               </button>
             </div>
           </form>
@@ -200,7 +200,7 @@ export default async function RepositoryPage({
                           href={acceptedDraft.file_url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 text-xs font-semibold shrink-0 seamless-btn shadow-xs"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#E11D48] hover:bg-[#BE123C] dark:bg-[#F472B6] dark:hover:bg-[#FF80AB] text-white dark:text-[#0F0F12] text-xs font-bold shrink-0 seamless-btn shadow-xs transition-colors"
                         >
                           <Download className="w-3.5 h-3.5" />
                           <span>Unduh Naskah ({acceptedDraft.file_type?.toUpperCase()})</span>

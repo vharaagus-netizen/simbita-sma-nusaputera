@@ -335,20 +335,20 @@ export default async function StudentDashboard() {
 
             {/* FITUR 4 (JIKA SAKLAR ON): HASIL NILAI SIDANG */}
             {featureSettings.defense_scoring && scores.length > 0 && averageFinalScore !== null && (
-              <div className="bg-white dark:bg-[#111927] border border-purple-200/80 dark:border-purple-900/60 rounded-2xl p-5 shadow-xs space-y-3 seamless-card">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+              <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs space-y-3 seamless-card">
+                <div className="flex items-center justify-between pb-2 border-b border-pink-200/60 dark:border-[#2E2838]">
                   <div className="flex items-center gap-2">
-                    <Award className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                    <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                    <Award className="w-4 h-4 text-[#E11D48] dark:text-[#FF80AB]" />
+                    <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                       Hasil Penilaian Sidang Tugas Akhir
                     </h3>
                   </div>
-                  <span className="text-xs font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/60 px-3 py-1 rounded-full border border-purple-200/60 dark:border-purple-800/50">
+                  <span className="text-xs font-bold text-[#E11D48] dark:text-[#FF80AB] bg-pink-100 dark:bg-[#2D2235] px-3 py-1 rounded-full border border-pink-200/80 dark:border-pink-900/50">
                     Nilai Akhir: {averageFinalScore} / 100
                   </span>
                 </div>
 
-                <div className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
+                <div className="divide-y divide-pink-200/60 dark:divide-[#2E2838] text-xs">
                   {scores.map((s, idx) => (
                     <div key={s.id || idx} className="py-2 flex items-center justify-between">
                       <div>
@@ -372,16 +372,16 @@ export default async function StudentDashboard() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link
                 href="/dashboard/student/guidance"
-                className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 hover:border-blue-400 dark:hover:border-blue-500 rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex items-start gap-4"
+                className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] hover:border-[#E11D48] dark:hover:border-[#FF80AB] rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex items-start gap-4 transition-all group"
               >
-                <div className="w-11 h-11 rounded-xl bg-blue-50 dark:bg-blue-950/50 border border-blue-200/60 dark:border-blue-800/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-2xs">
+                <div className="w-11 h-11 rounded-xl bg-white dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                  <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm group-hover:text-[#E11D48] dark:group-hover:text-[#FF80AB] transition-colors">
                     Revisi Berkas Naskah Bab (PDF / Word)
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                     Unggah naskah bab baru dan periksa catatan perbaikan dari guru pembimbing.
                   </p>
                 </div>
@@ -389,16 +389,16 @@ export default async function StudentDashboard() {
 
               <Link
                 href="/dashboard/student/journal"
-                className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-400 dark:hover:border-emerald-500 rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex items-start gap-4"
+                className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] hover:border-[#E11D48] dark:hover:border-[#FF80AB] rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex items-start gap-4 transition-all group"
               >
-                <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 shadow-2xs">
+                <div className="w-11 h-11 rounded-xl bg-white dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                  <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm group-hover:text-[#E11D48] dark:group-hover:text-[#FF80AB] transition-colors">
                     Jurnal Bimbingan Tatap Muka
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                     Catat riwayat konsultasi tatap muka di sekolah dan minta paraf digital guru.
                   </p>
                 </div>
@@ -406,16 +406,16 @@ export default async function StudentDashboard() {
             </div>
 
             {/* CETAK KARTU KONTROL BIMBINGAN */}
-            <div className="bg-white dark:bg-[#111927] border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="bg-[#FFF0F6] dark:bg-[#1E1B24] border border-pink-200/80 dark:border-[#2E2838] rounded-2xl p-5 shadow-xs dark:shadow-none seamless-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3.5">
-                <div className="w-11 h-11 rounded-xl bg-purple-50 dark:bg-purple-950/50 border border-purple-200/60 dark:border-purple-800/50 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0 shadow-2xs">
+                <div className="w-11 h-11 rounded-xl bg-white dark:bg-[#2D2235] border border-pink-200/80 dark:border-pink-900/50 text-[#E11D48] dark:text-[#FF80AB] flex items-center justify-center shrink-0 shadow-2xs">
                   <Printer className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-sm">
+                  <h3 className="font-bold text-[#0F172A] dark:text-[#F8FAFC] text-sm">
                     Cetak Lembar Kontrol & Kartu Bimbingan Digital
                   </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-slate-600 dark:text-slate-400">
                     Dokumen resmi siap cetak (A4/PDF) berisi seluruh rekapitulasi riwayat revisi dan paraf konsultasi bimbingan.
                   </p>
                 </div>
@@ -423,7 +423,7 @@ export default async function StudentDashboard() {
 
               <Link
                 href="/dashboard/student/print"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 font-semibold text-xs seamless-btn transition-colors shrink-0 shadow-xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#0F172A] hover:bg-slate-800 dark:bg-[#F8FAFC] dark:hover:bg-white text-white dark:text-[#0F0F12] font-semibold text-xs seamless-btn transition-colors shrink-0 shadow-xs active:scale-[0.98]"
               >
                 <Printer className="w-4 h-4" />
                 <span>Buka Lembar Cetak</span>
