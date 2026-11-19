@@ -30,43 +30,24 @@ export default async function MentorDashboard() {
     redirect('/login')
   }
 
-  // Ambil profil guru
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .single()
-
-  const mentorProfile = profile as Profile
-
-  // Ambil saklar fitur On / Off
-  const featureSettings = await getFeatureSettings()
-
-  // Ambil semua kelompok tugas akhir yang dibimbing oleh guru ini
-  const { data: thesesData } = await supabase
-    .from('theses')
-    .select(`
-      *,
-      leader:leader_id(*),
-      member:member_id(*)
-    `)
-    .eq('mentor_id', user.id)
-    .order('created_at', { ascending: false })
-
-  const assignedGroups = (thesesData || []) as (Thesis & {
-    leader?: Profile
-    member?: Profile
-  })[]
-
-  // Ambil kelompok di mana guru bertugas sebagai Penguji 1 atau Penguji 2 jika fitur penjadwalan aktif
-  let examiningGroups: (Thesis & {
-    leader?: Profile
-    member?: Profile
-    mentor?: Profile
-  })[] = []
-
-  if (featureSettings.defense_scheduling) {
-    const { data: examData } = await supabase
+  // Ambil profil guru, saklar fitur, dan kelompok bimbingan secara paralel
+  const [profileRes, featureSettings, thesesRes, examDataRes] = await Promise.all([
+    supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single(),
+    getFeatureSettings(),
+    supabase
+      .from('theses')
+      .select(`
+        *,
+        leader:leader_id(*),
+        member:member_id(*)
+      `)
+      .eq('mentor_id', user.id)
+      .order('created_at', { ascending: false }),
+    supabase
       .from('theses')
       .select(`
         *,
@@ -75,16 +56,24 @@ export default async function MentorDashboard() {
         mentor:mentor_id(*)
       `)
       .or(`examiner1_id.eq.${user.id},examiner2_id.eq.${user.id}`)
-      .order('defense_date', { ascending: true })
+      .order('defense_date', { ascending: true }),
+  ])
 
-    if (examData) {
-      examiningGroups = examData as (Thesis & {
-        leader?: Profile
-        member?: Profile
-        mentor?: Profile
-      })[]
-    }
-  }
+  const mentorProfile = profileRes.data as Profile
+
+  const assignedGroups = (thesesRes.data || []) as (Thesis & {
+    leader?: Profile
+    member?: Profile
+  })[]
+
+  // Ambil kelompok di mana guru bertugas sebagai Penguji 1 atau Penguji 2 jika fitur penjadwalan aktif
+  const examiningGroups = (featureSettings.defense_scheduling && examDataRes.data
+    ? examDataRes.data
+    : []) as (Thesis & {
+    leader?: Profile
+    member?: Profile
+    mentor?: Profile
+  })[]
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] transition-colors duration-200">

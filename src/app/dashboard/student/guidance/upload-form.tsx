@@ -38,7 +38,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
 
     setLoading(true)
     setProgress(10)
-    setStatusMessage('Menghubungkan ke server Singapura...')
+    setStatusMessage('Menyiapkan saluran unggah...')
 
     try {
       // 1. Ambil URL unggah aman (Direct Signed Upload URL)
@@ -54,7 +54,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
       setStatusMessage('Mengunggah naskah langsung ke penyimpanan cloud...')
 
       // 2. Unggah langsung dari browser ke Supabase Storage (Direct Upload)
-      // Jalur langsung Indonesia -> Singapura berkecepatan tinggi dengan progress akurat
+      // Jalur langsung berkecepatan tinggi dengan progress akurat
       await new Promise<void>((resolve, reject) => {
         const xhr = new XMLHttpRequest()
         xhr.open('PUT', prep.uploadUrl!)
@@ -223,7 +223,7 @@ export default function GuidanceUploadForm({ thesisId }: { thesisId: string }) {
       <div className="flex flex-col sm:flex-row items-end sm:items-center justify-between gap-2 pt-1">
         <span className="text-[11px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
           <FileCheck className="w-3.5 h-3.5 text-slate-400" />
-          <span>Jalur unggah cepat langsung terhubung ke Singapura (maks 15 MB)</span>
+          <span>Unggah naskah format PDF atau Word (maksimal 15 MB)</span>
         </span>
 
         <button

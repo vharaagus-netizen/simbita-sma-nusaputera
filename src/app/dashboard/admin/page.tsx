@@ -47,23 +47,27 @@ export default async function AdminDashboardPage() {
     redirect('/')
   }
 
-  // Ambil pengaturan fitur On / Off
-  const featureSettings = await getFeatureSettings()
+  // Ambil pengaturan fitur dan data dashboard secara paralel
+  const [featureSettings, thesesRes, allUsersRes] = await Promise.all([
+    getFeatureSettings(),
+    supabase
+      .from('theses')
+      .select(`
+        *,
+        leader:leader_id(*),
+        member:member_id(*),
+        mentor:mentor_id(*),
+        examiner1:examiner1_id(*),
+        examiner2:examiner2_id(*)
+      `)
+      .order('created_at', { ascending: false }),
+    supabase
+      .from('profiles')
+      .select('*')
+      .order('created_at', { ascending: false }),
+  ])
 
-  // 1. Ambil semua kelompok tugas akhir beserta data ketua, anggota, pembimbing, dan penguji
-  const { data: thesesData } = await supabase
-    .from('theses')
-    .select(`
-      *,
-      leader:leader_id(*),
-      member:member_id(*),
-      mentor:mentor_id(*),
-      examiner1:examiner1_id(*),
-      examiner2:examiner2_id(*)
-    `)
-    .order('created_at', { ascending: false })
-
-  const theses = (thesesData || []) as (Thesis & {
+  const theses = (thesesRes.data || []) as (Thesis & {
     leader?: Profile
     member?: Profile
     mentor?: Profile
@@ -71,31 +75,13 @@ export default async function AdminDashboardPage() {
     examiner2?: Profile
   })[]
 
-  // 2. Ambil daftar semua guru pembimbing yang terdaftar
-  const { data: mentorsData } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('role', 'mentor')
-    .order('name', { ascending: true })
-
-  const mentors = (mentorsData || []) as Profile[]
-
-  // 3. Ambil daftar semua siswa yang terdaftar
-  const { data: studentsData } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('role', 'student')
-    .order('name', { ascending: true })
-
-  const students = (studentsData || []) as Profile[]
-
-  // 4. Ambil semua akun pengguna untuk Manajemen Pengguna
-  const { data: allUsersData } = await supabase
-    .from('profiles')
-    .select('*')
-    .order('created_at', { ascending: false })
-
-  const allUsers = (allUsersData || []) as Profile[]
+  const allUsers = (allUsersRes.data || []) as Profile[]
+  const mentors = allUsers
+    .filter((u) => u.role === 'mentor')
+    .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+  const students = allUsers
+    .filter((u) => u.role === 'student')
+    .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
 
   // Statistik ringkas
   const totalTheses = theses.length

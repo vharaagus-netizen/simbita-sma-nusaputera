@@ -33,33 +33,30 @@ export default async function StudentDashboard() {
     redirect('/login')
   }
 
-  // Ambil profil siswa
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', user.id)
-    .single()
+  // Ambil profil siswa, saklar fitur, dan data kelompok tugas akhir secara paralel
+  const [profileRes, featureSettings, thesisRes] = await Promise.all([
+    supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single(),
+    getFeatureSettings(),
+    supabase
+      .from('theses')
+      .select(`
+        *,
+        leader:leader_id(*),
+        member:member_id(*),
+        mentor:mentor_id(*),
+        examiner1:examiner1_id(*),
+        examiner2:examiner2_id(*)
+      `)
+      .or(`leader_id.eq.${user.id},member_id.eq.${user.id}`)
+      .maybeSingle(),
+  ])
 
-  const studentProfile = profile as Profile
-
-  // Ambil saklar fitur On / Off
-  const featureSettings = await getFeatureSettings()
-
-  // Cari tugas akhir yang melibatkan siswa ini (baik sebagai ketua maupun anggota)
-  const { data: thesisData } = await supabase
-    .from('theses')
-    .select(`
-      *,
-      leader:leader_id(*),
-      member:member_id(*),
-      mentor:mentor_id(*),
-      examiner1:examiner1_id(*),
-      examiner2:examiner2_id(*)
-    `)
-    .or(`leader_id.eq.${user.id},member_id.eq.${user.id}`)
-    .maybeSingle()
-
-  const thesis = thesisData as (Thesis & {
+  const studentProfile = profileRes.data as Profile
+  const thesis = thesisRes.data as (Thesis & {
     leader?: Profile
     member?: Profile
     mentor?: Profile
