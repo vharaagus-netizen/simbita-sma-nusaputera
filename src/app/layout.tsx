@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +27,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "SIMBITA — SMA Nusaputera Semarang",
   description: "Sistem Informasi Bimbingan Tugas Akhir & Karya Tulis Ilmiah SMA Nusaputera Semarang",
+  applicationName: "SIMBITA",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "SIMBITA Nusaputera",
+    title: "SIMBITA",
+  },
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
   },
 };
 
@@ -68,6 +80,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-white dark:bg-[#0F0F12] text-[#0F172A] dark:text-[#F8FAFC] font-sans transition-colors duration-200">
         <ThemeProvider>
           {children}
+          <PWAInstallPrompt />
         </ThemeProvider>
       </body>
     </html>
